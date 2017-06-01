@@ -6,7 +6,6 @@ local paddle_funcs = {}
 --PADDLE CLASS--
 ----------------
 
---Rectangle: is a positionable and colorful object with width and height
 Paddle = Class{
     __includes = {RECT},
     init = function(self)
@@ -30,7 +29,7 @@ Paddle = Class{
 --PADDLE FUNCTIONS--
 --------------------
 
--- UPDATE AND DRAW FUNCTIONS
+--UPDATE AND DRAW FUNCTIONS--
 
 function Paddle:update(dt)
 

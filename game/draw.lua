@@ -18,7 +18,7 @@ function draw.allTables()
 
     DrawTable(DRAW_TABLE.L1)
 
-    DrawTable(DRAW_TABLE.L2)
+    DrawTable(DRAW_TABLE.L2) --Balls
 
     DrawTable(DRAW_TABLE.L3) --Paddle
 

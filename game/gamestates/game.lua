@@ -1,4 +1,5 @@
 local Paddle = require "classes.paddle"
+local Ball = require "classes.ball"
 
 --MODULE FOR THE GAMESTATE: GAME--
 
@@ -7,6 +8,10 @@ local state = {}
 function state:enter()
 
 	Paddle.create("player")
+
+	local x, y = O_WIN_W/2, O_WIN_H/2 --Initial ball position in the middle of the screen
+	local dx, dy = love.math.random(100) - 50, love.math.random(50) --Random initial direction for ball, going downwards
+	Ball.create(x, y, dx, dy, "ball")
 
 end
 
