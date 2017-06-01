@@ -14,6 +14,7 @@ require "classes.primitive"
 Color = require "classes.color.color"
 require "classes.color.rgb"
 require "classes.color.hsl"
+require "classes.paddle"
 
 
 --MY MODULES

@@ -20,6 +20,8 @@ function draw.allTables()
 
     DrawTable(DRAW_TABLE.L2)
 
+    DrawTable(DRAW_TABLE.L3) --Paddle
+
     CAM:detach() --Stop tracking camera
 
     DrawTable(DRAW_TABLE.GUI)
