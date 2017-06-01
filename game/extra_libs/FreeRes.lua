@@ -58,13 +58,10 @@ end
 param color = {r, g, b, a} (defaults to black)
 --]]
 function FreeRes.letterbox(color)
-  local c, temp
-
-  c = Color.black()
-  c.l = 10
 
   love.graphics.pop()
-  Color.set(c)
+  Color.set(color)
+  
   -- Upper / Left letterbox
   love.graphics.rectangle("fill", 0, 0, letterWidth, letterHeight)
 

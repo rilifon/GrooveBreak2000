@@ -27,7 +27,7 @@ function draw.allTables()
     DrawTable(DRAW_TABLE.GUI)
 
     --Creates letterbox at the sides of the screen if needed
-    FreeRes.letterbox(Color.black())
+    FreeRes.letterbox(Color.purple())
 
 end
 

@@ -16,7 +16,7 @@ function setup.config()
        --
 
     --GLOBAL VARIABLES--
-    DEBUG = true --DEBUG mode status
+    DEBUG = false --DEBUG mode status
 
     local w, h = love.graphics.getDimensions() --Get current window size
 

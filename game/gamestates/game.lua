@@ -17,6 +17,10 @@ end
 
 function state:update(dt)
 
+	Util.updateDrawTable(dt)
+
+	Util.updateTimers(dt)
+
 	Util.destroyAll()
 
 end
@@ -27,13 +31,49 @@ function state:draw()
 
 end
 
-function state:touchpressed(id, x, y, dx, dy, pressure)
+function state:touchpressed(...)
 	local p = Util.findId("player")
 
 	if p then
-		p:touchpressed(id, x, y, dx, dy, pressure)
+		p:touchpressed(...)
 	end
-	
+
+end
+
+function state:touchreleased(...)
+	local p = Util.findId("player")
+
+	if p then
+		p:touchreleased(...)
+	end
+
+end
+
+function state:touchmoved(...)
+	local p = Util.findId("player")
+
+	if p then
+		p:touchmoved(...)
+	end
+
+end
+
+function state:mousepressed(...)
+	local p = Util.findId("player")
+
+	if p then
+		p:mousepressed(...)
+	end
+
+end
+
+function state:mousereleased(...)
+	local p = Util.findId("player")
+
+	if p then
+		p:mousereleased(...)
+	end
+
 end
 
 function state:keypressed(key)
