@@ -18,8 +18,12 @@ function setup.config()
     --GLOBAL VARIABLES--
     DEBUG = true --DEBUG mode status
 
-    WINDOW_WIDTH = love.graphics.getWidth() --Current width of the game window
-    WINDOW_HEIGHT = love.graphics.getHeight() --Current height of the game window
+    local w, h = love.graphics.getDimensions() --Get current window size
+
+    WINDOW_WIDTH = w --Current width of the game window
+    WINDOW_HEIGHT = h --Current height of the game window
+    O_WIN_W = 1536 --Default width of the game window
+    O_WIN_H = 2276 --Default height of the game window
 
 
     --TIMERS--
@@ -40,6 +44,7 @@ function setup.config()
 
     --WINDOW CONFIG--
     love.window.setMode(WINDOW_WIDTH, WINDOW_HEIGHT, {resizable = true, minwidth = 100, minheight = 100})
+    FreeRes.setScreen() --Setup FreeRes library to handle screen resolutions
 
     --CAMERA--
     CAM = Camera(love.graphics.getWidth()/2, love.graphics.getHeight()/2) --Set camera position to center of screen
