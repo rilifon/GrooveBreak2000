@@ -13,7 +13,7 @@ Ball = Class{
         CIRC.init(self, _x, _y, radius, Color.blue())
 
         self.dir = Vector(_dx, _dy):normalized()
-        self.speed = 700
+        self.speed = 800
 
         self.static = true
 
@@ -29,9 +29,39 @@ Ball = Class{
 
 function Ball:update(dt)
 
-    --Move the ball
+
+    --Handle ball movement
     if not self.static then
+        --Move ball
         self.pos = self.pos + self.dir*self.speed*dt
+
+
+        local left_wall, right_wall, up_wall, down_wall = 0, O_WIN_W, 0, O_WIN_H
+        --Check for left or right wall collision
+        if self.pos.x - self.r <= left_wall or self.pos.x + self.r >= right_wall then
+            self.dir.x = -self.dir.x
+        end
+
+        --Check for up or down wall collision
+        if self.pos.y - self.r <= up_wall or self.pos.y + self.r >= down_wall then
+            self.dir.y = -self.dir.y
+        end
+
+        --Check collision with paddle
+        local paddle = Util.findId("player")
+        if paddle and Util.circInRect({x = self.pos.x, y = self.pos.y, r = self.r}, {x = paddle.pos.x, y = paddle.pos.y, w = paddle.w, h = paddle.h}) then
+            --Invert y direction
+            self.dir.y = -self.dir.y
+
+
+            --Change x direction based on position ball hitted the pad
+            if self.pos.x >= paddle.pos.x and self.pos.x <= paddle.pos.x + paddle. w then
+                self.dir.x = ( (self.pos.x - paddle.pos.x) / (paddle.w) ) * (2) - 1
+                self.dir = self.dir:normalized()
+            end
+
+        end
+
     end
 
 end
@@ -55,9 +85,6 @@ function ball_funcs.create(x, y, dx, dy, id)
 
     local b = Ball(x, y, dx, dy)
     b:addElement(DRAW_TABLE.L2, nil, id)
-
-    --Make ball keep static for a few seconds before moving
-    b.handles["start_static"] = MAIN_TIMER.after(2, function() b.static = false end)
 
     return b
 end
