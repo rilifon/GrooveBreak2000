@@ -123,7 +123,6 @@ function Paddle:mousepressed(x, y, button, isTouch)
     --Leave function if touch, because it will be handled on touchpressed function
     if isTouch then return end
 
-    --Check touch collision with all enemies
     local w, h = FreeRes.windowDistance()
     local scale = FreeRes.scale()
     x = x - w

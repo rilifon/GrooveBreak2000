@@ -12,7 +12,7 @@ Brick = Class{
         local width, height, color, hits_to_break
 
         if _type == "regular" then
-            width = 100
+            width = 170
             height = 60
             color = Color.red()
             hits_to_break = 1
@@ -58,7 +58,7 @@ function Brick:got_hit(ball)
 
     self.hits_to_break = self.hits_to_break - 1
     if self.hits_to_break <= 0 then
-        self.die()
+        self:die()
     end
 
 end

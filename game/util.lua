@@ -189,7 +189,7 @@ end
 function util.destroyAll()
 
     for T in pairs(SUBTP_TABLE) do
-        util.destroySubTp(T)
+        util.destroySubtype(T)
     end
 
     for o in pairs(ID_TABLE) do

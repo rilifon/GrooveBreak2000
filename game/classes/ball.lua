@@ -18,6 +18,7 @@ Ball = Class{
         self.static = true --If ball cant move
 
         self.can_hit_paddle = true --If ball can hit the paddle
+        self.last_brick_hit = nil --Last brick ball touched. Used so ball doensn't "hit" same brick twice before hitting something else (such as wall or paddle)
 
         self.tp = "ball"
     end,
@@ -43,18 +44,21 @@ function Ball:update(dt)
         if self.pos.x - self.r <= left_wall or self.pos.x + self.r >= right_wall then
             self.dir.x = -self.dir.x
             self.can_hit_paddle = true
+            self.last_brick_hit = nil
         end
 
         --Check for up or down wall collision
         if self.pos.y - self.r <= up_wall or self.pos.y + self.r >= down_wall then
             self.dir.y = -self.dir.y
             self.can_hit_paddle = true
+            self.last_brick_hit = nil
         end
 
         --Check collision with paddle
         local paddle = Util.findId("player")
         if paddle and  self.can_hit_paddle and Util.circInRect({x = self.pos.x, y = self.pos.y, r = self.r}, {x = paddle.pos.x, y = paddle.pos.y, w = paddle.w, h = paddle.h}) then
             self.can_hit_paddle = false
+            self.last_brick_hit = nil
 
             --Ball is hitting the top of the paddle
             if self.pos.y <= paddle.pos.y then
@@ -82,7 +86,6 @@ function Ball:update(dt)
 
                     --Ball is hitting the top or bottom of the brick
                     if self.pos.y <= brick.pos.y or self.pos.y >= brick.pos.y + brick.h then
-                        --Invert y direction
                         self.dir.y = -self.dir.y
 
                     --Ball is hitting the side of the paddle
@@ -98,6 +101,7 @@ function Ball:update(dt)
         end
 
 
+        --Invert y direction
     end
 
 end

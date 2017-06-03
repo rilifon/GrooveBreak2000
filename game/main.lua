@@ -16,9 +16,10 @@ require "classes.color.rgb"
 require "classes.color.hsl"
 require "classes.paddle"
 require "classes.ball"
-
+require "classes.brick"
 
 --MY MODULES
+
 Util      = require "util"
 Draw      = require "draw"
 Setup     = require "setup"

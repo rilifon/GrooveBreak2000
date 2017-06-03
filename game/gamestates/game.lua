@@ -1,5 +1,7 @@
 local Paddle = require "classes.paddle"
 local Ball = require "classes.ball"
+local Brick = require "classes.brick"
+
 
 --MODULE FOR THE GAMESTATE: GAME--
 
@@ -70,17 +72,29 @@ function state:touchmoved(...)
 
 end
 
-function state:mousepressed(...)
+function state:mousepressed(x, y, button, isTouch)
 
 	local p = Util.findId("player")
 	if p then
-		p:mousepressed(...)
+		p:mousepressed(x, y, button, isTouch)
 	end
 
 	--Start moving the ball if its static after touching the screen
 	local b = Util.findId("ball")
 	if b and b.static then
 		b.static = false
+	end
+
+	if button == 2 then
+
+		local w, h = FreeRes.windowDistance()
+		local scale = FreeRes.scale()
+		x = x - w
+		x = x*(1/scale)
+		y = y - h
+		y = y*(1/scale)
+
+		Brick.create(x,y,"regular")
 	end
 
 end
