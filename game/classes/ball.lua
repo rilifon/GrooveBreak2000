@@ -47,11 +47,16 @@ function Ball:update(dt)
             self.last_brick_hit = nil
         end
 
-        --Check for up or down wall collision
-        if self.pos.y - self.r <= up_wall or self.pos.y + self.r >= down_wall then
+        --Check for up wall collision
+        if self.pos.y - self.r <= up_wall then
             self.dir.y = -self.dir.y
             self.can_hit_paddle = true
             self.last_brick_hit = nil
+        end
+		
+        --Check for down wall collision
+        if self.pos.y + self.r >= down_wall then
+            self:die()
         end
 
         --Check collision with paddle
@@ -114,6 +119,10 @@ function Ball:draw()
     Color.set(b.color)
     love.graphics.circle("fill", b.pos.x, b.pos.y, b.r)
 
+end
+
+function Ball:die()
+    self.death = true
 end
 
 ---------------------
