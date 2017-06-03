@@ -60,8 +60,8 @@ function Ball:update(dt)
             self.can_hit_paddle = false
             self.last_brick_hit = nil
 
-            --Ball is hitting the top of the paddle
-            if self.pos.y <= paddle.pos.y then
+            --Ball is hitting the top or bottom of the paddle
+            if self.pos.y <= paddle.pos.y or self.pos.y >= paddle.pos.y + paddle.h then
                 --Invert y direction
                 self.dir.y = -self.dir.y
 
