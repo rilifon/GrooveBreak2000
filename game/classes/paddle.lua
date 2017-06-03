@@ -113,7 +113,7 @@ function Paddle:touchmoved(id, x, y, dx, dy, pressure)
 
     --If touch moving is the one controlling the paddle, move the paddle
     if id == self.touchId then
-        Paddle:move(x)
+        self:move(x)
     end
 
 end
