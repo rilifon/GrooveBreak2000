@@ -15,7 +15,9 @@ Ball = Class{
         self.dir = Vector(_dx, _dy):normalized()
         self.speed = 800
 
-        self.static = true
+        self.static = true --If ball cant move
+
+        self.can_hit_paddle = true --If ball can hit the paddle
 
         self.tp = "ball"
     end,
@@ -40,24 +42,33 @@ function Ball:update(dt)
         --Check for left or right wall collision
         if self.pos.x - self.r <= left_wall or self.pos.x + self.r >= right_wall then
             self.dir.x = -self.dir.x
+            self.can_hit_paddle = true
         end
 
         --Check for up or down wall collision
         if self.pos.y - self.r <= up_wall or self.pos.y + self.r >= down_wall then
             self.dir.y = -self.dir.y
+            self.can_hit_paddle = true
         end
 
         --Check collision with paddle
         local paddle = Util.findId("player")
-        if paddle and Util.circInRect({x = self.pos.x, y = self.pos.y, r = self.r}, {x = paddle.pos.x, y = paddle.pos.y, w = paddle.w, h = paddle.h}) then
-            --Invert y direction
-            self.dir.y = -self.dir.y
+        if paddle and  self.can_hit_paddle and Util.circInRect({x = self.pos.x, y = self.pos.y, r = self.r}, {x = paddle.pos.x, y = paddle.pos.y, w = paddle.w, h = paddle.h}) then
+            self.can_hit_paddle = false
 
+            --Ball is hitting the top of the paddle
+            if self.pos.y <= paddle.pos.y then
+                --Invert y direction
+                self.dir.y = -self.dir.y
 
-            --Change x direction based on position ball hitted the pad
-            if self.pos.x >= paddle.pos.x and self.pos.x <= paddle.pos.x + paddle. w then
-                self.dir.x = ( (self.pos.x - paddle.pos.x) / (paddle.w) ) * (2) - 1
+                --Change x direction based on position ball hitted the pad
+                self.dir.x = ((self.pos.x - paddle.pos.x)/(paddle.w))*2 - 1
                 self.dir = self.dir:normalized()
+
+            --Ball is hitting the side of the paddle
+            else
+                --Invert x direction
+                self.dir.x = -self.dir.x
             end
 
         end
