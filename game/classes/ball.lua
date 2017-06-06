@@ -13,7 +13,7 @@ Ball = Class{
         CIRC.init(self, _x, _y, radius, Color.blue())
 
         self.dir = Vector(_dx, _dy):normalized()
-        self.speed = 900
+        self.speed = 1400
 
         self.static = true --If ball cant move
 

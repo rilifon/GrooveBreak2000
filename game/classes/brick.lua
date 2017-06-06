@@ -21,6 +21,10 @@ Brick = Class{
 
         self.hits_to_break = hits_to_break
 
+        self.can_drag = false --If you can drag this brick around
+        self.is_being_dragged = false
+        self.touch_id = nil --Id that is dragguing this brick
+
         self.tp = "brick"
     end,
 }
@@ -33,7 +37,18 @@ Brick = Class{
 
 function Brick:update(dt)
 
+    --Update brick position if its being dragged
+    if self.is_being_dragged then
+        local x, y = love.mouse.getPosition()
+        local w, h = FreeRes.windowDistance()
+        local scale = FreeRes.scale()
+        x = x - w
+        x = x*(1/scale)
+        y = y - h
+        y = y*(1/scale)
 
+        self.pos.x, self.pos.y = x - self.w/2, y - self.h/2
+    end
 
 end
 
@@ -48,6 +63,88 @@ end
 function Brick:die()
 
     self.death = true
+
+end
+
+--MOUSE AND TOUCH FUNCTIONS--
+
+function Brick:touchpressed(id, x, y, dx, dy, pressure)
+
+    if self.can_drag == false or TOUCH_IS_DRAGGING_BRICK[id] then return end
+
+	local w, h = FreeRes.windowDistance()
+	local scale = FreeRes.scale()
+	x = x - w
+	x = x*(1/scale)
+	y = y - h
+	y = y*(1/scale)
+
+    --Check if touch collides with the brick, and if so, stores the touch id for checking movement
+    if Util.pointInRect({x = x, y = y}, {x = self.pos.x, y = self.pos.y, w = self.w, h = self.h}) then
+        self.touchId = id
+        TOUCH_IS_DRAGGING_BRICK[id] = true
+    end
+
+end
+
+function Brick:touchreleased(id, x, y, dx, dy, pressure)
+
+    --Check if touch released was the one controlling the brick
+    if id == self.touchId then
+        self.touchId = nil
+        TOUCH_IS_DRAGGING_BRICK[id] = nil
+    end
+
+end
+
+function Brick:touchmoved(id, x, y, dx, dy, pressure)
+
+    if not self.can_drag then return end
+
+    --If touch moving is the one controlling the brick, move the paddle
+    if id == self.touchId then
+        local w, h = FreeRes.windowDistance()
+        local scale = FreeRes.scale()
+        x = x - w
+        x = x*(1/scale)
+        y = y - h
+        y = y*(1/scale)
+
+        if self.handles["moving"] then MAIN_TIMER.cancel(self.handles["moving"]) end
+        self.handles["moving"] = MAIN_TIMER.tween(self.move_duration, self.pos, {x = x - self.w/2}, 'out-quad')
+    end
+
+end
+
+function Brick:mousepressed(x, y, button, isTouch)
+
+    --Leave function if touch, because it will be handled on touchpressed function
+    if isTouch or not self.can_drag or MOUSE_IS_DRAGGING_BRICK then return end
+
+    local w, h = FreeRes.windowDistance()
+    local scale = FreeRes.scale()
+    x = x - w
+    x = x*(1/scale)
+    y = y - h
+    y = y*(1/scale)
+
+    --Check if mouse collides with the brick, and if so, brick is considered being dragged until mouse release
+    if button == 1 and Util.pointInRect({x = x, y = y}, {x = self.pos.x, y = self.pos.y, w = self.w, h = self.h}) then
+        self.is_being_dragged = true
+        MOUSE_IS_DRAGGING_BRICK = true
+    end
+
+end
+
+function Brick:mousereleased(x, y, button, isTouch)
+
+    --Leave function if touch, because it will be handled on touchpressed function
+    if isTouch then return end
+
+    if button == 1 then
+        self.is_being_dragged = false
+        MOUSE_IS_DRAGGING_BRICK = false
+    end
 
 end
 
@@ -67,13 +164,25 @@ end
 --UTILITY FUNCTIONS--
 ---------------------
 
---Create a paddle
+--Create a brick
 function brick_funcs.create(x, y, type, st, id)
 
     st = st or "bricks"
 
     local b = Brick(x, y, type)
     b:addElement(DRAW_TABLE.L1, st, id)
+
+    return b
+end
+
+--Create a brick that can be dragged
+function brick_funcs.createDrag(x, y, type, st, id)
+
+    st = st or "bricks"
+
+    local b = Brick(x, y, type)
+    b:addElement(DRAW_TABLE.L1, st, id)
+    b.can_drag = true
 
     return b
 end

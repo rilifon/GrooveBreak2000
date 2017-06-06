@@ -9,8 +9,8 @@ local paddle_funcs = {}
 Paddle = Class{
     __includes = {RECT},
     init = function(self)
-        local start_pos = Vector(100, O_WIN_H - 200)
         local width, height = 240, 50
+        local start_pos = Vector(O_WIN_W/2 - width/2, O_WIN_H - 200)
         RECT.init(self, start_pos.x, start_pos.y, width, height, Color.orange())
 
         --Collision shape for handling touching and moving the paddle

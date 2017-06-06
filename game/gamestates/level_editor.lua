@@ -1,4 +1,6 @@
 local Editor_Box = require "classes.editor_box"
+local Brick = require "classes.brick"
+
 
 --MODULE FOR THE GAMESTATE: LEVEL EDITOR--
 
@@ -49,6 +51,98 @@ function state:draw()
 
 end
 
+function state:touchpressed(id, x, y, dx, dy, pressure)
+
+	local bricks = Util.findSubtype("bricks")
+
+	if bricks then
+		for brick in pairs(bricks) do
+			brick:touchpressed(id, x, y, dx, dy, pressure)
+		end
+	end
+
+	local w, h = FreeRes.windowDistance()
+	local scale = FreeRes.scale()
+	x = x - w
+	x = x*(1/scale)
+	y = y - h
+	y = y*(1/scale)
+
+	checkButtonsCollisions(x, y)
+
+end
+
+function state:touchreleased(...)
+
+	local bricks = Util.findSubtype("bricks")
+
+	if bricks then
+		for brick in pairs(bricks) do
+			brick:touchreleased(...)
+		end
+	end
+
+end
+
+function state:touchmoved(...)
+
+	local bricks = Util.findSubtype("bricks")
+
+	if bricks then
+		for brick in pairs(bricks) do
+			brick:touchmoved(...)
+		end
+	end
+
+end
+
+function state:mousepressed(x, y, button, isTouch)
+
+	local bricks = Util.findSubtype("bricks")
+
+	if bricks then
+		for brick in pairs(bricks) do
+			brick:mousepressed(x, y, button, isTouch)
+		end
+	end
+
+	if button == 2 then
+
+		local w, h = FreeRes.windowDistance()
+		local scale = FreeRes.scale()
+		x = x - w
+		x = x*(1/scale)
+		y = y - h
+		y = y*(1/scale)
+
+		Brick.createDrag(x,y,"regular")
+	elseif button == 1 then
+
+		local w, h = FreeRes.windowDistance()
+		local scale = FreeRes.scale()
+		x = x - w
+		x = x*(1/scale)
+		y = y - h
+		y = y*(1/scale)
+
+		checkButtonsCollisions(x, y)
+
+	end
+
+end
+
+function state:mousereleased(x, y, button, isTouch)
+
+	local bricks = Util.findSubtype("bricks")
+
+	if bricks then
+		for brick in pairs(bricks) do
+			brick:mousereleased(x, y, button, isTouch)
+		end
+	end
+
+end
+
 function state:keypressed(key)
 
 	if key == "escape" then
@@ -59,18 +153,6 @@ function state:keypressed(key)
 
 end
 
-function state:mousepressed(x, y, button, istouch)
-
-	local w, h = FreeRes.windowDistance()
-    local scale = FreeRes.scale()
-    x = x - w
-    x = x*(1/scale)
-    y = y - h
-    y = y*(1/scale)
-
-	checkButtonsCollisions(x, y)
-
-end
 
 function state:touchpressed(id, x, y, dx, dy, pressure)
 

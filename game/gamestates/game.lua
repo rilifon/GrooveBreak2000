@@ -20,7 +20,7 @@ function state:enter()
 	Paddle.create("player")
 
 	local x, y = O_WIN_W/2, O_WIN_H/2 --Initial ball position in the middle of the screen
-	local angle = math.pi/2 + love.math.random(2*math.pi/8) - math.pi/8 --Get an initial random angle between 247.5 and 292.5
+	local angle = math.pi/2 + love.math.random()*2*math.pi/8 - math.pi/8 --Get an initial random angle between 247.5 and 292.5
 	local dx, dy = math.cos(angle), math.sin(angle) --Random initial direction for ball, going downwards
 	Ball.create(x, y, dx, dy, "ball")
 

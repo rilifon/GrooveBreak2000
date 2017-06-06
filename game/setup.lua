@@ -11,6 +11,7 @@ function setup.config()
 
     --RANDOM SEED--
     love.math.setRandomSeed( os.time() )
+    love.math.setRandomSeed( os.time() )
 
     --IMAGES--
        --
@@ -24,6 +25,9 @@ function setup.config()
     WINDOW_HEIGHT = h --Current height of the game window
     O_WIN_W = 1536 --Default width of the game window
     O_WIN_H = 2276 --Default height of the game window
+
+    MOUSE_IS_DRAGGING_BRICK = false --If mouse is already dragging a brick, so it doesn't drag anything else
+    TOUCH_IS_DRAGGING_BRICK = {} --If a touch id is already dragging a brick, so it doesn't drag anything else
 
 
     --TIMERS--
