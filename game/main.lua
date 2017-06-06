@@ -17,6 +17,7 @@ require "classes.color.hsl"
 require "classes.paddle"
 require "classes.ball"
 require "classes.brick"
+require "classes.button"
 
 --MY MODULES
 
@@ -30,8 +31,9 @@ Font      = require "font"
 
 --GAMESTATES
 GS = {
---MENU     = require "gamestate.menu",     --Menu Gamestate
+MENU     = require "gamestates.menu",     --Menu Gamestate
 GAME     = require "gamestates.game",     --Game Gamestate
+LVL_EDT  = require "gamestates.level_editor", --Level Editor Gamestate
 --PAUSE    = require "gamestate.pause",    --Pause Gamestate
 --GAMEOVER = require "gamestate.gameover"  --Gameover Gamestate
 }
@@ -45,7 +47,7 @@ function love.load()
     Setup.config() --Configure your game
 
     Gamestate.registerEvents() --Overwrites love callbacks to call Gamestate as well
-    Gamestate.switch(GS.GAME) --Jump to the inicial state
+    Gamestate.switch(GS.MENU) --Jump to the inicial state
 
 end
 

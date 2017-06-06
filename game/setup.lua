@@ -50,11 +50,16 @@ function setup.config()
     --CAMERA--
     CAM = Camera(love.graphics.getWidth()/2, love.graphics.getHeight()/2) --Set camera position to center of screen
 
+    --FONTS--
+    Font.new("nevis", "assets/fonts/Nevis.ttf")
+
     --SHADERS--
         --
 
     --AUDIO--
        --
+
+
 
 end
 
