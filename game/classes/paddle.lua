@@ -37,13 +37,6 @@ function Paddle:update(dt)
     if self.isBeingDragged then
 
         local x, y = love.mouse.getPosition()
-        local w, h = FreeRes.windowDistance()
-        local scale = FreeRes.scale()
-        x = x - w
-        x = x*(1/scale)
-        y = y - h
-        y = y*(1/scale)
-
         self:move(x)
 
     end
@@ -79,13 +72,6 @@ end
 
 function Paddle:touchpressed(id, x, y, dx, dy, pressure)
 
-	local w, h = FreeRes.windowDistance()
-	local scale = FreeRes.scale()
-	x = x - w
-	x = x*(1/scale)
-	y = y - h
-	y = y*(1/scale)
-
     --Check if touch collides with the paddle, and if so, stores the touch id for checking movement
     if Util.pointInRect({x = x, y = y}, self.touch_collision_shape) then
         self.touchId = id
@@ -104,13 +90,6 @@ end
 
 function Paddle:touchmoved(id, x, y, dx, dy, pressure)
 
-	local w, h = FreeRes.windowDistance()
-	local scale = FreeRes.scale()
-	x = x - w
-	x = x*(1/scale)
-	y = y - h
-	y = y*(1/scale)
-
     --If touch moving is the one controlling the paddle, move the paddle
     if id == self.touchId then
         self:move(x)
@@ -122,13 +101,6 @@ function Paddle:mousepressed(x, y, button, isTouch)
 
     --Leave function if touch, because it will be handled on touchpressed function
     if isTouch then return end
-
-    local w, h = FreeRes.windowDistance()
-    local scale = FreeRes.scale()
-    x = x - w
-    x = x*(1/scale)
-    y = y - h
-    y = y*(1/scale)
 
     --Check if mouse collides with the paddle, and if so, paddle is considered being dragged until mouse release
     if button == 1 and Util.pointInRect({x = x, y = y}, self.touch_collision_shape) then

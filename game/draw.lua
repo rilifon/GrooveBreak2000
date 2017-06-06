@@ -9,25 +9,19 @@ local draw = {}
 --Draws every drawable object from all tables
 function draw.allTables()
 
-    --Makes transformations regarding screen current size
-    FreeRes.transform()
-
     DrawTable(DRAW_TABLE.BG)
 
-    CAM:attach() --Start tracking camera
+    --CAM:attach() --Start tracking camera
 
-    DrawTable(DRAW_TABLE.L1)
+    DrawTable(DRAW_TABLE.L1) --Bricks
 
     DrawTable(DRAW_TABLE.L2) --Balls
 
     DrawTable(DRAW_TABLE.L3) --Paddle
 
-    CAM:detach() --Stop tracking camera
+    --CAM:detach() --Stop tracking camera
 
     DrawTable(DRAW_TABLE.GUI)
-
-    --Creates letterbox at the sides of the screen if needed
-    FreeRes.letterbox(Color.purple())
 
 end
 

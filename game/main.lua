@@ -5,9 +5,6 @@ Class     = require "extra_libs.hump.class"
 Camera    = require "extra_libs.hump.camera"
 Vector    = require "extra_libs.hump.vector"
 
---OTHER EXTRA LIBS
-FreeRes = require "extra_libs.FreeRes"
-
 
 --CLASSES
 require "classes.primitive"
@@ -26,9 +23,7 @@ Util      = require "util"
 Draw      = require "draw"
 Setup     = require "setup"
 Font      = require "font"
-
-
-
+Res       = require "res_manager"
 
 --GAMESTATES
 GS = {
@@ -43,21 +38,20 @@ LVL_EDT  = require "gamestates.level_editor", --Level Editor Gamestate
 --LÖVE FUNCTIONS--
 ------------------
 
+
 function love.load()
+
 
     Setup.config() --Configure your game
 
     Gamestate.registerEvents() --Overwrites love callbacks to call Gamestate as well
+
+    --[[
+        Setup support for multiple resolutions. Res.init() Must be called after Gamestate.registerEvents()
+        so it will properly call the draw function applying translations.
+    ]]
+    Res.init() --Setup support for multiple resolutions.; Must be called after gamestt
+
     Gamestate.switch(GS.MENU) --Jump to the inicial state
-
-end
-
---Called when user resizes the screen
-function love.resize(w, h)
-
-    WINDOW_WIDTH = w
-    WINDOW_HEIGHT = h
-
-    FreeRes.setScreen() --Refresh FreeRes library to handle screen resolutions
 
 end

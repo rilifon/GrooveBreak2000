@@ -61,13 +61,6 @@ function state:touchpressed(id, x, y, dx, dy, pressure)
 		end
 	end
 
-	local w, h = FreeRes.windowDistance()
-	local scale = FreeRes.scale()
-	x = x - w
-	x = x*(1/scale)
-	y = y - h
-	y = y*(1/scale)
-
 	checkButtonsCollisions(x, y)
 
 end
@@ -108,22 +101,9 @@ function state:mousepressed(x, y, button, isTouch)
 
 	if button == 2 then
 
-		local w, h = FreeRes.windowDistance()
-		local scale = FreeRes.scale()
-		x = x - w
-		x = x*(1/scale)
-		y = y - h
-		y = y*(1/scale)
-
 		Brick.createDrag(x,y,"regular")
-	elseif button == 1 then
 
-		local w, h = FreeRes.windowDistance()
-		local scale = FreeRes.scale()
-		x = x - w
-		x = x*(1/scale)
-		y = y - h
-		y = y*(1/scale)
+	elseif button == 1 then
 
 		checkButtonsCollisions(x, y)
 
@@ -156,15 +136,7 @@ end
 
 function state:touchpressed(id, x, y, dx, dy, pressure)
 
-	local w, h = FreeRes.windowDistance()
-    local scale = FreeRes.scale()
-    x = x - w
-    x = x*(1/scale)
-    y = y - h
-    y = y*(1/scale)
-
 	checkButtonsCollisions(x, y)
-
 
 end
 

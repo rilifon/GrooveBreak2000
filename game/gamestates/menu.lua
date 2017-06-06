@@ -36,7 +36,6 @@ end
 
 
 function state:update(dt)
-
 	if switch == "game" then
 		Gamestate.switch(GS.GAME)
 	elseif switch == "editor" then
@@ -65,25 +64,11 @@ end
 
 function state:mousepressed(x, y, button, istouch)
 
-	local w, h = FreeRes.windowDistance()
-    local scale = FreeRes.scale()
-    x = x - w
-    x = x*(1/scale)
-    y = y - h
-    y = y*(1/scale)
-
 	checkButtonsCollisions(x, y)
 
 end
 
 function state:touchpressed(id, x, y, dx, dy, pressure)
-
-	local w, h = FreeRes.windowDistance()
-	local scale = FreeRes.scale()
-	x = x - w
-	x = x*(1/scale)
-	y = y - h
-	y = y*(1/scale)
 
 	checkButtonsCollisions(x, y)
 

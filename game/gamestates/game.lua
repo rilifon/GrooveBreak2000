@@ -100,21 +100,14 @@ function state:mousepressed(x, y, button, isTouch)
 	end
 
 	if button == 2 then
-
-		local w, h = FreeRes.windowDistance()
-		local scale = FreeRes.scale()
-		x = x - w
-		x = x*(1/scale)
-		y = y - h
-		y = y*(1/scale)
-
+		
 		Brick.create(x,y,"regular")
+
 	end
 
 end
 
 function state:mousereleased(...)
-
 	local p = Util.findId("player")
 	if p then
 		p:mousereleased(...)
