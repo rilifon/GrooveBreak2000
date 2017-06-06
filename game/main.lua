@@ -18,6 +18,7 @@ require "classes.paddle"
 require "classes.ball"
 require "classes.brick"
 require "classes.button"
+require "classes.editor_box"
 
 --MY MODULES
 

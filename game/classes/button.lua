@@ -39,7 +39,6 @@ end
 
 --UTILITY FUNCTIONS--
 
---Create a bullet in the (x,y) position, direction dir, color c and subtype st
 function button_funcs.createRegularButton(x, y, w, h, c, text, func, st, id)
 
     st = st or "regular_buttons"

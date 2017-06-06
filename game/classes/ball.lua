@@ -13,7 +13,7 @@ Ball = Class{
         CIRC.init(self, _x, _y, radius, Color.blue())
 
         self.dir = Vector(_dx, _dy):normalized()
-        self.speed = 800
+        self.speed = 900
 
         self.static = true --If ball cant move
 
@@ -53,7 +53,7 @@ function Ball:update(dt)
             self.can_hit_paddle = true
             self.last_brick_hit = nil
         end
-		
+
         --Check for down wall collision
         if self.pos.y + self.r >= down_wall then
             self:die()

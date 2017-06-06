@@ -7,7 +7,7 @@ local state = {}
 
 --LOCAL VARIABLES--
 
-local switch = nil --If game shoudl swith to another state
+local switch = nil --If game should swith to another state
 
 --LOCAL FUNCTIONS--
 
@@ -16,6 +16,8 @@ local checkCollisions
 --STATE FUNCTIONS--
 
 function state:enter()
+
+	switch = nil
 
 	--Start Game button
 	Button.createRegularButton(400, 400, 400, 400, Color.red(), "Start Game", function() switch = "game" end)

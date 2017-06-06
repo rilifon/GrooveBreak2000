@@ -7,7 +7,15 @@ local Brick = require "classes.brick"
 
 local state = {}
 
+--LOCAL VARIABLES--
+
+local switch = nil --If game should swith to another state
+
+--STATE FUNCTIONS--
+
 function state:enter()
+
+	switch = nil
 
 	Paddle.create("player")
 
@@ -20,10 +28,16 @@ end
 
 function state:leave()
 
+	Util.destroyAll("force")
+
 end
 
 
 function state:update(dt)
+
+	if switch == "menu" then
+		Gamestate.switch(GS.MENU)
+	end
 
 	Util.updateDrawTable(dt)
 
@@ -110,7 +124,11 @@ end
 
 function state:keypressed(key)
 
-    Util.defaultKeyPressed(key)
+	if key == "escape" then
+		switch = "menu"
+	else
+    	Util.defaultKeyPressed(key)
+	end
 
 end
 
