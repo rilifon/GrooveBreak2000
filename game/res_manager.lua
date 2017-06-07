@@ -38,14 +38,12 @@ function res.init()
 			return registry[f](x, y, ...)
 		end
 	end
-
     registry["mousemoved"] = love["mousemoved"] or __NULL__
     love["mousemoved"] = function(x, y, dx, dy, ...)
         x, y = love.mouse.getPosition() -- fixed
         dx, dy = dx * res.scale(), dy * res.scale()
         return registry["mousemoved"](x, y, dx, dy, ...)
     end
-
     callbacks = {"touchpressed", "touchreleased", "touchmoved"}
     for _, f in ipairs(callbacks) do
         registry[f] = love[f] or __NULL__
@@ -56,7 +54,7 @@ function res.init()
         end
     end
 
-    --Overwrite love draw function
+    --Overwrite love draw function to add pre and after translation effects
     registry["draw"] = love["draw"] or __NULL__
     love["draw"] = function(...)
         res.preDraw()

@@ -39,12 +39,14 @@ end
 
 --UTILITY FUNCTIONS--
 
-function button_funcs.createRegularButton(x, y, w, h, c, text, func, st, id)
+function button_funcs.createRegularButton(x, y, w, h, c, text, func, st, id, return_only)
 
     st = st or "regular_buttons"
 
     local b = RegularButton(x, y, w, h, c, text, func)
-    b:addElement(DRAW_TABLE.L1, st, id)
+    if not return_only then
+        b:addElement(DRAW_TABLE.L1, st, id)
+    end
 
     return b
 end

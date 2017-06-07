@@ -88,6 +88,7 @@ function Ball:update(dt)
             for brick in pairs (all_bricks) do
                 if not (brick == self.last_brick_hit) and Util.circInRect({x = self.pos.x, y = self.pos.y, r = self.r}, {x = brick.pos.x, y = brick.pos.y, w = brick.w, h = brick.h}) then
                     self.last_brick_hit = brick
+                    self.can_hit_paddle = true
 
                     --Ball is hitting the top or bottom of the brick
                     if self.pos.y <= brick.pos.y or self.pos.y >= brick.pos.y + brick.h then

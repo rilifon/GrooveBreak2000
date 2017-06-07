@@ -100,7 +100,7 @@ function state:mousepressed(x, y, button, isTouch)
 	end
 
 	if button == 2 then
-		
+
 		Brick.create(x,y,"regular")
 
 	end

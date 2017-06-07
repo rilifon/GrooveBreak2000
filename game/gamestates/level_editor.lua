@@ -61,6 +61,11 @@ function state:touchpressed(id, x, y, dx, dy, pressure)
 		end
 	end
 
+	local editor_box = Util.findId("editor_box")
+	if editor_box then
+		editor_box:touchpressed(id, x, y, dx, dy, pressure)
+	end
+
 	checkButtonsCollisions(x, y)
 
 end
@@ -99,13 +104,18 @@ function state:mousepressed(x, y, button, isTouch)
 		end
 	end
 
-	if button == 2 then
+	local editor_box = Util.findId("editor_box")
+	if editor_box then
+		editor_box:mousepressed(x, y, button, isTouch)
+	end
 
-		Brick.createDrag(x,y,"regular")
-
-	elseif button == 1 then
+	if button == 1 then
 
 		checkButtonsCollisions(x, y)
+
+	elseif button == 2 then
+
+		Brick.createDrag(x,y,"regular")
 
 	end
 

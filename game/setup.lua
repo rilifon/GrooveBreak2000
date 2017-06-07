@@ -34,11 +34,12 @@ function setup.config()
     --INITIALIZING TABLES--
     --Drawing Tables
     DRAW_TABLE = {
-    BG  = {}, --Background (bottom layer, first to draw)
-    L1  = {}, --Layer 1
-    L2  = {}, --Layer 2
-    L3  = {}, --Layer 3
-    GUI = {}  --Graphic User Interface (top layer, last to draw)
+        BG  = {}, --Background (bottom layer, first to draw)
+        EDITOR = {}, --Editor BOx layer
+        L1  = {},    --Layer 1
+        L2  = {},    --Layer 2
+        L3  = {},    --Layer 3
+        GUI = {}     --Graphic User Interface (top layer, last to draw)
     }
 
     --Other Tables

@@ -11,15 +11,17 @@ function draw.allTables()
 
     DrawTable(DRAW_TABLE.BG)
 
-    --CAM:attach() --Start tracking camera
+    CAM:attach() --Start tracking camera
+
+    DrawTable(DRAW_TABLE.EDITOR) --Editor box
 
     DrawTable(DRAW_TABLE.L1) --Bricks
 
     DrawTable(DRAW_TABLE.L2) --Balls
 
-    DrawTable(DRAW_TABLE.L3) --Paddle
+    DrawTable(DRAW_TABLE.L3) --Paddle/Editor Box
 
-    --CAM:detach() --Stop tracking camera
+    CAM:detach() --Stop tracking camera
 
     DrawTable(DRAW_TABLE.GUI)
 

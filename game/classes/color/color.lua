@@ -7,6 +7,20 @@ local Hsl = require "classes.color.hsl"
 local Color = {}
 local Default = "HSL" --Default mode for colors in this program.
 
+--Returns a new color, given its 4 basic values: (hue, saturation, lightness and alpha) or (red, green, blue and alpha).
+--You can provide the type, or else it will use the default type
+function Color.new(h_r, s_g, l_b, a, type)
+    type = type or Default
+    a = a or 255
+    if type == "HSL" then
+        return HSL(h_r, s_g, l_b, a)
+    elseif type == "RGB" then
+        return RGB(h_r, s_g, l_b, a)
+    else
+        return Color.white()
+    end
+end
+
 --Returns a new color identical to the one provided
 function Color.getCopy(c)
     if c1.type == "RGB" then
