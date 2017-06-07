@@ -13,8 +13,10 @@ function setup.config()
     love.math.setRandomSeed( os.time() )
     love.math.setRandomSeed( os.time() )
 
+    args = FM.load() --Load from savefile (or create one if needed)
+
     --IMAGES--
-       --
+    IMG_ICE_BLOCK = love.graphics.newImage("assets/images/ice_block.png")
 
     --GLOBAL VARIABLES--
     DEBUG = false --DEBUG mode status
@@ -27,6 +29,7 @@ function setup.config()
     MOUSE_IS_DRAGGING_BRICK = false --If mouse is already dragging a brick, so it doesn't drag anything else
     TOUCH_IS_DRAGGING_BRICK = {} --If a touch id is already dragging a brick, so it doesn't drag anything else
 
+    CUSTOM_LEVELS = args.custom_levels --All custom levels created by the player
 
     --TIMERS--
     MAIN_TIMER = Timer.new()  --General Timer

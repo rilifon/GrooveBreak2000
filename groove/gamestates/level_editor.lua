@@ -115,7 +115,7 @@ function state:mousepressed(x, y, button, isTouch)
 
 	elseif button == 2 then
 
-		Brick.createDrag(x,y,"regular")
+		Brick.createDrag(x,y,"regular_ice")
 
 	end
 

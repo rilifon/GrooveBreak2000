@@ -24,7 +24,7 @@ EditorBox = Class{
         self.pages = {
             --First page
             {
-                obj1 = Brick.createButton(300, y + 80, "regular"),
+                obj1 = Brick.createButton(300, y + 80, "regular_ice"),
                 obj2 = nil,
                 obj3 = nil,
 

@@ -13,15 +13,22 @@ Brick = Class{
 
         self.type = _type
 
-        if _type == "regular" then
-            width = 170
-            height = 60
+        if _type == "regular_ice" then
+            width = 180
+            height = 75
             color = Color.red()
             hits_to_break = 1
+            image = IMG_ICE_BLOCK
+            sx = 1.5
+            sy = 1.5
         end
         RECT.init(self, _x, _y, width, height, color)
 
         self.hits_to_break = hits_to_break
+
+        self.image = image
+        self.sx = 1.5 --X scaling of the image
+        self.sy = 1.5 --Y scaling of the image
 
         self.can_drag = false --If you can drag this brick around
         self.is_being_dragged = false
@@ -55,8 +62,8 @@ end
 function Brick:draw()
     local b = self
 
-    Color.set(b.color)
-    love.graphics.rectangle("fill", b.pos.x, b.pos.y, b.w, b.h)
+    Color.set(Color.white())
+    love.graphics.draw(self.image, b.pos.x, b.pos.y, 0, self.sx, self.sy)
 
 end
 

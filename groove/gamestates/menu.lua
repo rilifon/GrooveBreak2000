@@ -22,8 +22,11 @@ function state:enter()
 	--Start Game button
 	Button.createRegularButton(400, 400, 400, 400, Color.red(), "Start Game", function() switch = "game" end)
 
+	--Custom Levels button
+	Button.createRegularButton(400, 900, 400, 400, Color.red(), "Custom Levels", function() switch = "custom" end)
+
 	--Start Editor button
-	Button.createRegularButton(400, 900, 400, 400, Color.red(), "Start Editor", function() switch = "editor" end)
+	Button.createRegularButton(400, 1400, 400, 400, Color.red(), "Start Editor", function() switch = "editor" end)
 
 
 end
@@ -38,6 +41,8 @@ end
 function state:update(dt)
 	if switch == "game" then
 		Gamestate.switch(GS.GAME)
+	elseif switch == "custom" then
+		Gamestate.switch(GS.CSTM_LVLS)
 	elseif switch == "editor" then
 		Gamestate.switch(GS.LVL_EDT)
 	end
