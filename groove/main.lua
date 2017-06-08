@@ -21,6 +21,7 @@ require "classes.ball"
 require "classes.brick"
 require "classes.button"
 require "classes.editor_box"
+require "classes.particle"
 
 --MY MODULES
 
@@ -30,6 +31,7 @@ Setup     = require "setup"
 Font      = require "font"
 Res       = require "res_manager"
 FM        = require "file_manager"
+FX        = require "fx"
 
 --GAMESTATES
 GS = {

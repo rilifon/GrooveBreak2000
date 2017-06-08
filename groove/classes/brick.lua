@@ -13,22 +13,56 @@ Brick = Class{
 
         self.type = _type
 
+        --ICE BLOCKS
         if _type == "regular_ice" then
-            width = 180
-            height = 75
-            color = Color.red()
-            hits_to_break = 1
-            image = IMG_ICE_BLOCK
             sx = 1.5
             sy = 1.5
+            width = 180
+            height = 75
+            color = Color.new(0,0,255)
+            hits_to_break = 1
+            image = IMG_ICE_BLOCK
+            quads = {}
+            for i = 1, hits_to_break do
+                quads[i] = love.graphics.newQuad(0, (i-1)*height/sy, width/sx, height/sy, image:getDimensions())
+            end
+        elseif _type == "tough_ice" then
+            sx = 1.5
+            sy = 1.5
+            width = 180
+            height = 75
+            color = Color.new(90,120,185)
+            hits_to_break = 3
+            image = IMG_ICE_BLOCK
+            quads = {}
+            for i = 1, hits_to_break do
+                quads[i] = love.graphics.newQuad(0, (i-1)*height/sy, width/sx, height/sy, image:getDimensions())
+            end
+        elseif _type == "super_tough_ice" then
+            sx = 1.5
+            sy = 1.5
+            width = 180
+            height = 75
+            color = Color.new(160,130,185)
+            hits_to_break = 5
+            image = IMG_ICE_BLOCK
+            quads = {}
+            for i = 1, hits_to_break do
+                quads[i] = love.graphics.newQuad(0, (i-1)*height/sy, width/sx, height/sy, image:getDimensions())
+            end
         end
         RECT.init(self, _x, _y, width, height, color)
 
-        self.hits_to_break = hits_to_break
+        self.hits_to_break = hits_to_break --How many hits the block needs to break
+        self.is_destroyed = false --If the block is being destroyed
+
 
         self.image = image
+        self.quads = quads
+        self.cur_quad = 1 --Current quad to draw
         self.sx = 1.5 --X scaling of the image
         self.sy = 1.5 --Y scaling of the image
+
 
         self.can_drag = false --If you can drag this brick around
         self.is_being_dragged = false
@@ -62,15 +96,22 @@ end
 function Brick:draw()
     local b = self
 
-    Color.set(Color.white())
-    love.graphics.draw(self.image, b.pos.x, b.pos.y, 0, self.sx, self.sy)
+    Color.set(self.color)
+    love.graphics.draw(self.image, self.quads[self.cur_quad], b.pos.x, b.pos.y, 0, self.sx, self.sy)
 
 end
 
+--Create animation of brick being destroyed before removing it
 function Brick:die()
 
     self.death = true
 
+    local color
+    if self.type == "regular_ice" or self.type == "tough_ice" then
+        color = Color.new(140,200,255)
+    end
+
+    FX.explosion(self.pos.x + self.w/2, self.pos.y + self.h/2, color)
 end
 
 --MOUSE AND TOUCH FUNCTIONS--
@@ -114,8 +155,8 @@ function Brick:touchmoved(id, x, y, dx, dy, pressure)
     --If touch moving is the one controlling the brick, move the paddle
     if id == self.touchId then
 
-        if self.handles["moving"] then MAIN_TIMER.cancel(self.handles["moving"]) end
-        self.handles["moving"] = MAIN_TIMER.tween(self.move_duration, self.pos, {x = x - self.w/2}, 'out-quad')
+        if self.handles["moving"] then MAIN_TIMER:cancel(self.handles["moving"]) end
+        self.handles["moving"] = MAIN_TIMER:tween(self.move_duration, self.pos, {x = x - self.w/2}, 'out-quad')
     end
 
 end
@@ -158,6 +199,8 @@ function Brick:got_hit(ball)
     self.hits_to_break = self.hits_to_break - 1
     if self.hits_to_break <= 0 then
         self:die()
+    else
+        self.cur_quad = self.cur_quad + 1
     end
 
 end

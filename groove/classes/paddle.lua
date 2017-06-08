@@ -126,8 +126,8 @@ end
 function Paddle:move(x)
     local p = self
 
-    if p.handles["moving"] then MAIN_TIMER.cancel(p.handles["moving"]) end
-    p.handles["moving"] = MAIN_TIMER.tween(p.move_duration, p.pos, {x = x - p.w/2}, 'out-quad')
+    if p.handles["moving"] then MAIN_TIMER:cancel(p.handles["moving"]) end
+    p.handles["moving"] = MAIN_TIMER:tween(p.move_duration, p.pos, {x = x - p.w/2}, 'out-quad')
 
 end
 

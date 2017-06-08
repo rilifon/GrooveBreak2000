@@ -24,9 +24,9 @@ EditorBox = Class{
         self.pages = {
             --First page
             {
-                obj1 = Brick.createButton(300, y + 80, "regular_ice"),
-                obj2 = nil,
-                obj3 = nil,
+                obj1 = Brick.createButton(300, y + 65, "regular_ice"),
+                obj2 = Brick.createButton(650, y + 65, "tough_ice"),
+                obj3 = Brick.createButton(1000, y + 65, "super_tough_ice"),
 
             },
             --Second page
@@ -96,7 +96,8 @@ function EditorBox:draw()
     --Draw page number
     Color.set(Color.red())
     Font.set("nevis", 50)
-    love.graphics.print(self.cur_page, self.pos.x + 10, self.pos.y)
+    local text = self.cur_page.."/"..self.max_page
+    love.graphics.print(text, self.pos.x + 10, self.pos.y)
 
 end
 

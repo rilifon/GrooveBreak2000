@@ -15,6 +15,8 @@ function draw.allTables()
 
     DrawTable(DRAW_TABLE.EDITOR) --Editor box
 
+    DrawTable(DRAW_TABLE.L0) --Particles
+
     DrawTable(DRAW_TABLE.L1) --Bricks
 
     DrawTable(DRAW_TABLE.L2) --Balls

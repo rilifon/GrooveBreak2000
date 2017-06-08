@@ -9,7 +9,7 @@ local ball_funcs = {}
 Ball = Class{
     __includes = {CIRC},
     init = function(self, _x, _y, _dx, _dy)
-        local radius = 40
+        local radius = 30
         CIRC.init(self, _x, _y, radius, Color.blue())
 
         self.dir = Vector(_dx, _dy):normalized()
@@ -86,7 +86,7 @@ function Ball:update(dt)
         local all_bricks = Util.findSubtype("bricks")
         if not Util.tableEmpty(all_bricks) then
             for brick in pairs (all_bricks) do
-                if not (brick == self.last_brick_hit) and Util.circInRect({x = self.pos.x, y = self.pos.y, r = self.r}, {x = brick.pos.x, y = brick.pos.y, w = brick.w, h = brick.h}) then
+                if not brick.death and not (brick == self.last_brick_hit) and Util.circInRect({x = self.pos.x, y = self.pos.y, r = self.r}, {x = brick.pos.x, y = brick.pos.y, w = brick.w, h = brick.h}) then
                     self.last_brick_hit = brick
                     self.can_hit_paddle = true
 

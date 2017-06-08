@@ -101,7 +101,7 @@ function state:mousepressed(x, y, button, isTouch)
 
 	if button == 2 then
 
-		Brick.create(x,y,"regular_ice")
+		Brick.create(x,y,"tough_ice")
 
 	end
 

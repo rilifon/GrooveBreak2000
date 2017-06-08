@@ -145,7 +145,7 @@ end
 --Update all timers
 function util.updateTimers(dt)
 
-    MAIN_TIMER.update(dt)
+    MAIN_TIMER:update(dt)
 
 end
 
