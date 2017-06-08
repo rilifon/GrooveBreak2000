@@ -182,9 +182,9 @@ function Brick:die()
 
     local color
     if self.type == "regular_ice" or self.type == "tough_ice" or  self.type == "super_tough_ice" then
-        color = Color.new(140,200,255)
+        color = Color.new(140,200,225)
     elseif self.type == "regular_lava" or self.type == "tough_lava" or  self.type == "super_tough_lava" then
-        color = Color.new(0,200,255)
+        color = Color.new(0,200,225)
     elseif self.type == "regular_rock" or self.type == "tough_rock" or  self.type == "super_tough_rock" then
         color = Color.new(39, 33, 117)
     end

@@ -19,6 +19,11 @@ function setup.config()
     IMG_ICE_BLOCK = love.graphics.newImage("assets/images/ice_block.png")
     IMG_LAVA_BLOCK = love.graphics.newImage("assets/images/lava_block.png")
     IMG_ROCK_BLOCK = love.graphics.newImage("assets/images/rock_block.png")
+    IMG_SHOVEL = love.graphics.newImage("assets/images/shovel.png")
+    IMG_ICE_SHOVEL = love.graphics.newImage("assets/images/ice_shovel.png")
+    IMG_FIRE_SHOVEL = love.graphics.newImage("assets/images/fire_shovel.png")
+
+
 
     --GLOBAL VARIABLES--
     DEBUG = false --DEBUG mode status

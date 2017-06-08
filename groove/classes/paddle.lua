@@ -24,6 +24,28 @@ Paddle = Class{
         self.initial_lives = 4
         self.lives = self.initial_lives --Number of lives the paddle currently has
 
+        self.type = "normal" --What type the paddle is (can be "normal", "ice" or "fire")
+        self.images = {
+            normal = IMG_SHOVEL,
+            ice = IMG_ICE_SHOVEL,
+            fire = IMG_FIRE_SHOVEL,
+        }
+        self.sx, self.sy = 2, 2
+        self.quads = {}
+        for i = 1, 8 do
+            self.quads[i] = love.graphics.newQuad(0, (i-1)*360/8, 120, 360/8, self.images[self.type]:getDimensions())
+        end
+        self.cur_quad = 1
+        self.time_per_frames = .1
+        self.handles["animation"] = MAIN_TIMER:script(
+            function(wait)
+                while true do
+                    wait(self.time_per_frames)
+                    self.cur_quad = (self.cur_quad%8) + 1
+                end
+            end
+        )
+
         self.tp = "paddle"
     end,
 }
@@ -66,8 +88,8 @@ function Paddle:draw()
         love.graphics.rectangle("fill", t.x, t.y, t.w, t.h)
     end
 
-    Color.set(p.color)
-    love.graphics.rectangle("fill", p.pos.x, p.pos.y, p.w, p.h)
+    Color.set(Color.white())
+    love.graphics.draw(p.images[p.type], p.quads[p.cur_quad], p.pos.x, p.pos.y, 0, p.sx, p.sy)
 
 end
 
