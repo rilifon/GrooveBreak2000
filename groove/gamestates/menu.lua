@@ -19,6 +19,8 @@ function state:enter()
 
 	switch = nil
 
+	LEVEL_TO_LOAD = nil
+
 	--Start Game button
 	Button.createRegularButton(400, 400, 400, 400, Color.red(), "Start Game", function() switch = "game" end)
 

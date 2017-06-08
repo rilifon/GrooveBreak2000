@@ -160,7 +160,8 @@ end
 function editor_funcs.save_custom_level()
     local t = {
         bricks = {},
-        name = love.math.random(1,100)
+        name = love.math.random(1,100),
+        type = "custom"
     }
     local bricks = Util.findSubtype("bricks")
     if bricks then

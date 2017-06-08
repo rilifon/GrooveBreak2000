@@ -13,8 +13,10 @@ RegularButton = Class{
 
         self.text = _text
         self.func = _func
+        self.font_name = "nevis"
         self.font_size = 50
         self.font_color = Color.black()
+        self.border_radius = nil
 
         self.tp = "regular_button" --Type of this class
     end
@@ -26,10 +28,10 @@ function RegularButton:draw()
 
     --Draw rectangle
     Color.set(self.color)
-    love.graphics.rectangle("fill", self.pos.x, self.pos.y, self.w, self.h)
+    love.graphics.rectangle("fill", self.pos.x, self.pos.y, self.w, self.h, self.border_radius)
 
     --Draw text
-    font = Font.set("nevis", self.font_size)
+    font = Font.set(self.font_name, self.font_size)
     Color.set(self.font_color)
     local tx = self.pos.x + self.w/2 - font:getWidth(self.text)/2
     local ty = self.pos.y + self.h/2 - font:getHeight(self.text)/2

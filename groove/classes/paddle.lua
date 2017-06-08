@@ -21,6 +21,9 @@ Paddle = Class{
 
         self.move_duration = .1
 
+        self.initial_lives = 4
+        self.lives = self.initial_lives --Number of lives the paddle currently has
+
         self.tp = "paddle"
     end,
 }
