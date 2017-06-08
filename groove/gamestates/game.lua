@@ -11,6 +11,10 @@ local state = {}
 
 local switch = nil --If game should swith to another state
 
+--LOCAL FUNCTION--
+
+local loadLevel
+
 --STATE FUNCTIONS--
 
 function state:enter()
@@ -23,6 +27,10 @@ function state:enter()
 	local angle = math.pi/2 + love.math.random()*2*math.pi/8 - math.pi/8 --Get an initial random angle between 247.5 and 292.5
 	local dx, dy = math.cos(angle), math.sin(angle) --Random initial direction for ball, going downwards
 	Ball.create(x, y, dx, dy, "ball")
+
+	if LEVEL_TO_LOAD then
+		loadLevel(LEVEL_TO_LOAD)
+	end
 
 end
 
@@ -121,6 +129,16 @@ function state:keypressed(key)
 		switch = "menu"
 	else
     	Util.defaultKeyPressed(key)
+	end
+
+end
+
+--LOCAL FUNCTIONS
+
+function loadLevel(level)
+
+	for _,brick in pairs(level.bricks) do
+		Brick.create(brick.x, brick.y, brick.type)
 	end
 
 end

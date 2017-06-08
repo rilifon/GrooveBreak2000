@@ -24,29 +24,29 @@ EditorBox = Class{
         self.pages = {
             --First page
             {
+                obj1 = Brick.createButton(300, y + 65, "regular_rock"),
+                obj2 = Brick.createButton(650, y + 65, "tough_rock"),
+                obj3 = Brick.createButton(1000, y + 65, "super_tough_rock"),
+
+            },
+            --Second page
+            {
                 obj1 = Brick.createButton(300, y + 65, "regular_ice"),
                 obj2 = Brick.createButton(650, y + 65, "tough_ice"),
                 obj3 = Brick.createButton(1000, y + 65, "super_tough_ice"),
 
             },
-            --Second page
-            {
-                obj1 = nil,
-                obj2 = nil,
-                obj3 = nil,
-
-            },
             --Third page
             {
-                obj1 = nil,
-                obj2 = nil,
-                obj3 = nil,
+                obj1 = Brick.createButton(300, y + 65, "regular_lava"),
+                obj2 = Brick.createButton(650, y + 65, "tough_lava"),
+                obj3 = Brick.createButton(1000, y + 65, "super_tough_lava"),
             },
         }
 
         self.change_page_button_default_color = Color.red()
         self.change_page_button_disabled_color = Color.new(0,40,100)
-        self.prev_page_button = Button.createRegularButton(10, O_WIN_H - 100, 130, 80, self.change_page_button_disabled_color, "prev",
+        self.prev_page_button = RegularButton(10, O_WIN_H - 100, 130, 80, self.change_page_button_disabled_color, "prev",
             function()
                 if self.cur_page > 1 then
                     self.next_page_button.color = self.change_page_button_default_color
@@ -55,9 +55,9 @@ EditorBox = Class{
                         self.prev_page_button.color = self.change_page_button_disabled_color
                     end
                 end
-            end, nil, nil, true)
+            end)
 
-        self.next_page_button = Button.createRegularButton(O_WIN_W - 140, O_WIN_H - 100, 130, 80, self.change_page_button_default_color, "next",
+        self.next_page_button = RegularButton(O_WIN_W - 140, O_WIN_H - 100, 130, 80, self.change_page_button_default_color, "next",
             function()
                 if self.cur_page < self.max_page then
                     self.prev_page_button.color = self.change_page_button_default_color
@@ -66,7 +66,13 @@ EditorBox = Class{
                         self.next_page_button.color = self.change_page_button_disabled_color
                     end
                 end
-            end, nil, nil, true)
+            end)
+
+        local width, height = 300, 100
+        self.save_button = RegularButton(O_WIN_W/2 - width/2, 0, width, height, Color.red(), "save",
+            function()
+                editor_funcs.save_custom_level()
+            end)
 
         self.tp = "editor_box" --Type of this class
     end
@@ -83,6 +89,7 @@ function EditorBox:draw()
     --Draw buttons
     self.prev_page_button:draw()
     self.next_page_button:draw()
+    self.save_button:draw()
 
 
     --Draw page objects
@@ -130,7 +137,7 @@ end
 function EditorBox:checkButtonsCollisions(x, y)
 
 	--Check collision with regular buttons
-	buts = {self.prev_page_button, self.next_page_button}
+	buts = {self.prev_page_button, self.next_page_button, self.save_button}
 	for _, but in pairs(buts) do
 		if Util.pointInRect({x = x, y = y}, {x = but.pos.x, y = but.pos.y, w = but.w, h = but.h}) then
 			but.func()
@@ -148,6 +155,24 @@ function editor_funcs.create()
     b:addElement(DRAW_TABLE.EDITOR, nil, "editor_box")
 
     return b
+end
+
+function editor_funcs.save_custom_level()
+    local t = {
+        bricks = {},
+        name = love.math.random(1,100)
+    }
+    local bricks = Util.findSubtype("bricks")
+    if bricks then
+        for brick in pairs(bricks) do
+            table.insert(t.bricks, {x = brick.pos.x, y = brick.pos.y, type = brick.type})
+        end
+    end
+
+    table.insert(CUSTOM_LEVELS, t)
+
+    Gamestate.switch(GS.MENU) --Go back to menu
+
 end
 
 --Return functions

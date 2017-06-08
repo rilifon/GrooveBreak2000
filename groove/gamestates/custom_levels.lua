@@ -13,6 +13,7 @@ local switch = nil --If game should swith to another state
 --LOCAL FUNCTIONS--
 
 local checkCollisions
+local createCustomLevelsButtons
 
 --STATE FUNCTIONS--
 
@@ -23,6 +24,7 @@ function state:enter()
 	--Title
 	Text.create(400, 200, "CUSTOM LEVELS", "nevis", 90)
 
+	createCustomLevelsButtons()
 
 end
 
@@ -91,6 +93,24 @@ function checkButtonsCollisions(x, y)
 				but.func()
 			end
 		end
+	end
+end
+
+function createCustomLevelsButtons()
+
+	local width = 800 --Width of the button
+	local height = 80 --Height of the button
+	local initial_x = O_WIN_W/2 - width/2 --X position of all buttons
+	local initial_y = 500 --Initial y position of all buttons
+	local gap = 30 --Gap between each button
+	local text
+	for i,level in ipairs(CUSTOM_LEVELS) do
+		text = level.name
+		Button.createRegularButton(initial_x, initial_y + (i-1)*(height+gap), width, height, Color.purple(), text,
+			function()
+				LEVEL_TO_LOAD = level
+				Gamestate.switch(GS.GAME)
+			end)
 	end
 end
 

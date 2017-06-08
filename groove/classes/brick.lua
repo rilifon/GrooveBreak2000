@@ -50,6 +50,80 @@ Brick = Class{
             for i = 1, hits_to_break do
                 quads[i] = love.graphics.newQuad(0, (i-1)*height/sy, width/sx, height/sy, image:getDimensions())
             end
+        --LAVA BLOCKS
+        elseif _type == "regular_lava" then
+            sx = 1.5
+            sy = 1.5
+            width = 180
+            height = 75
+            color = Color.new(0,0,255)
+            hits_to_break = 1
+            image = IMG_LAVA_BLOCK
+            quads = {}
+            for i = 1, hits_to_break do
+                quads[i] = love.graphics.newQuad(0, (i-1)*height/sy, width/sx, height/sy, image:getDimensions())
+            end
+        elseif _type == "tough_lava" then
+            sx = 1.5
+            sy = 1.5
+            width = 180
+            height = 75
+            color = Color.new(90,120,185)
+            hits_to_break = 3
+            image = IMG_LAVA_BLOCK
+            quads = {}
+            for i = 1, hits_to_break do
+                quads[i] = love.graphics.newQuad(0, (i-1)*height/sy, width/sx, height/sy, image:getDimensions())
+            end
+        elseif _type == "super_tough_lava" then
+            sx = 1.5
+            sy = 1.5
+            width = 180
+            height = 75
+            color = Color.new(160,130,185)
+            hits_to_break = 5
+            image = IMG_LAVA_BLOCK
+            quads = {}
+            for i = 1, hits_to_break do
+                quads[i] = love.graphics.newQuad(0, (i-1)*height/sy, width/sx, height/sy, image:getDimensions())
+            end
+        --ROCK BLOCKS
+    elseif _type == "regular_rock" then
+            sx = 1.5
+            sy = 1.5
+            width = 180
+            height = 75
+            color = Color.new(0,0,255)
+            hits_to_break = 1
+            image = IMG_ROCK_BLOCK
+            quads = {}
+            for i = 1, hits_to_break do
+                quads[i] = love.graphics.newQuad(0, (i-1)*height/sy, width/sx, height/sy, image:getDimensions())
+            end
+        elseif _type == "tough_rock" then
+            sx = 1.5
+            sy = 1.5
+            width = 180
+            height = 75
+            color = Color.new(90,120,185)
+            hits_to_break = 3
+            image = IMG_ROCK_BLOCK
+            quads = {}
+            for i = 1, hits_to_break do
+                quads[i] = love.graphics.newQuad(0, (i-1)*height/sy, width/sx, height/sy, image:getDimensions())
+            end
+        elseif _type == "super_tough_rock" then
+            sx = 1.5
+            sy = 1.5
+            width = 180
+            height = 75
+            color = Color.new(160,130,185)
+            hits_to_break = 5
+            image = IMG_ROCK_BLOCK
+            quads = {}
+            for i = 1, hits_to_break do
+                quads[i] = love.graphics.newQuad(0, (i-1)*height/sy, width/sx, height/sy, image:getDimensions())
+            end
         end
         RECT.init(self, _x, _y, width, height, color)
 
@@ -107,8 +181,12 @@ function Brick:die()
     self.death = true
 
     local color
-    if self.type == "regular_ice" or self.type == "tough_ice" then
+    if self.type == "regular_ice" or self.type == "tough_ice" or  self.type == "super_tough_ice" then
         color = Color.new(140,200,255)
+    elseif self.type == "regular_lava" or self.type == "tough_lava" or  self.type == "super_tough_lava" then
+        color = Color.new(0,200,255)
+    elseif self.type == "regular_rock" or self.type == "tough_rock" or  self.type == "super_tough_rock" then
+        color = Color.new(39, 33, 117)
     end
 
     FX.explosion(self.pos.x + self.w/2, self.pos.y + self.h/2, color)

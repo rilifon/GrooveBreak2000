@@ -17,6 +17,8 @@ function setup.config()
 
     --IMAGES--
     IMG_ICE_BLOCK = love.graphics.newImage("assets/images/ice_block.png")
+    IMG_LAVA_BLOCK = love.graphics.newImage("assets/images/lava_block.png")
+    IMG_ROCK_BLOCK = love.graphics.newImage("assets/images/rock_block.png")
 
     --GLOBAL VARIABLES--
     DEBUG = false --DEBUG mode status
@@ -30,6 +32,7 @@ function setup.config()
     TOUCH_IS_DRAGGING_BRICK = {} --If a touch id is already dragging a brick, so it doesn't drag anything else
 
     CUSTOM_LEVELS = args.custom_levels --All custom levels created by the player
+    LEVEL_TO_LOAD = nil --What level the gamestate "game" should load
 
     --TIMERS--
     MAIN_TIMER = Timer.new()  --General Timer
