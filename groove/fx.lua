@@ -5,13 +5,13 @@ local Particle = require "classes.particle"
 local fx_funcs = {}
 
 
-function fx_funcs.explosion(x,y,color)
+function fx_funcs.explosion(x, y, color, number, size, speed)
 
     --Default Values
-    local number = 25  --Number of particles created in a explosion
-    local speed  = 220  --Particles speed
+    local number = number or 25  --Number of particles created in a explosion
+    local size =  size or 10
+    local speed  = speed or 220  --Particles speed
     local decaying = 400  --Particles decaying alpha speed (decreases this amount per second, when reaching 0, it will be deleted)
-    local size =  10
 
 
     --Creates all particles of explosion

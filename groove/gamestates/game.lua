@@ -1,6 +1,9 @@
 local Paddle = require "classes.paddle"
 local Ball = require "classes.ball"
 local Brick = require "classes.brick"
+local Text = require "classes.text"
+local Button = require "classes.button"
+
 
 
 --MODULE FOR THE GAMESTATE: GAME--
@@ -10,10 +13,13 @@ local state = {}
 --LOCAL VARIABLES--
 
 local switch = nil --If game should swith to another state
+local you_won = false
+local win_texts = {"YOU WON", "CONGRATULATIONS", "YOU DA BEST"}
 
 --LOCAL FUNCTION--
 
 local loadLevel
+local checkWinCondition
 
 --STATE FUNCTIONS--
 
@@ -46,6 +52,8 @@ function state:update(dt)
 	if switch == "menu" then
 		Gamestate.switch(GS.MENU)
 	end
+
+	checkWinCondition()
 
 	Util.updateDrawTable(dt)
 
@@ -139,6 +147,31 @@ function loadLevel(level)
 
 	for _,brick in pairs(level.bricks) do
 		Brick.create(brick.x, brick.y, brick.type)
+	end
+
+end
+
+function checkWinCondition()
+
+	if you_won then return end
+
+	if Util.tableLen(Util.findSubtype("bricks")) <= 0 then
+		you_won = true
+
+		--Create win text
+		local text = Util.randomElement(win_texts)
+		local font = Font.get("nevis", 120)
+		local tx = font:getWidth(text)
+		local ty = font:getHeight(text)
+		Text.create(O_WIN_W/2 - tx/2, O_WIN_H/2 - ty/2, text, "nevis", 120)
+
+		--Remove ball
+		local b = Util.findId("ball")
+		if b and not b.death then
+			b.death = true
+			FX.explosion(b.pos.x, b.pos.y, Color.red(), 40, 8, 500)
+		end
+
 	end
 
 end
