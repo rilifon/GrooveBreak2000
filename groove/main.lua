@@ -4,6 +4,7 @@ Timer     = require "extra_libs.hump.timer"
 Class     = require "extra_libs.hump.class"
 Camera    = require "extra_libs.hump.camera"
 Vector    = require "extra_libs.hump.vector"
+Signal    = require 'extra_libs.hump.signal'
 
 --OTHER EXTRA LIBS
 

@@ -16,6 +16,7 @@ local switch = nil --If game should swith to another state
 local you_won
 local win_texts = {"YOU WON", "CONGRATULATIONS", "YOU DA BEST"}
 local player_lives --How many lives the player start with
+local is_paused = false
 
 --End game screen
 local won_game_text
@@ -53,11 +54,13 @@ function state:update(dt)
 		Gamestate.switch(GS.MENU)
 	end
 
-	checkWinCondition()
+	if not is_paused then
+		checkWinCondition()
 
-	Util.updateDrawTable(dt)
+		Util.updateDrawTable(dt)
 
-	Util.updateTimers(dt)
+		Util.updateTimers(dt)
+	end
 
 	Util.destroyAll()
 
@@ -139,6 +142,8 @@ function state:keypressed(key)
 
 	if key == "escape" then
 		switch = "menu"
+	elseif key == "p" then
+		is_paused = not is_paused
 	else
     	Util.defaultKeyPressed(key)
 	end

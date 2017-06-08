@@ -22,6 +22,9 @@ function setup.config()
     IMG_SHOVEL = love.graphics.newImage("assets/images/shovel.png")
     IMG_ICE_SHOVEL = love.graphics.newImage("assets/images/ice_shovel.png")
     IMG_FIRE_SHOVEL = love.graphics.newImage("assets/images/fire_shovel.png")
+    IMG_BALL = love.graphics.newImage("assets/images/ball.png")
+    IMG_ICE_BALL = love.graphics.newImage("assets/images/ice_ball.png")
+    IMG_FIRE_BALL = love.graphics.newImage("assets/images/fire_ball.png")
 
 
 

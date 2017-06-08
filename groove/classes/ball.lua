@@ -20,6 +20,16 @@ Ball = Class{
         self.can_hit_paddle = true --If ball can hit the paddle
         self.last_brick_hit = nil --Last brick ball touched. Used so ball doensn't "hit" same brick twice before hitting something else (such as wall or paddle)
 
+        self.type = "normal" --What type the ball is (can be "normal", "ice" or "fire")
+        self.images = {
+            normal = IMG_BALL,
+            ice = IMG_ICE_BALL,
+            fire = IMG_FIRE_BALL,
+        }
+
+        self.rotation = 0 --Rotation of image
+        self.rotation_speed = 1 --Speed that the ball rotates
+
         self.tp = "ball"
     end,
 }
@@ -38,24 +48,35 @@ function Ball:update(dt)
         --Move ball
         self.pos = self.pos + self.dir*self.speed*dt
 
+        --Rotate ball based on horizontal speed
+        if self.dir.x > 0 then
+            self.rotation = self.rotation + self.rotation_speed*dt
+        elseif self.dir.x < 0 then
+            self.rotation = self.rotation - self.rotation_speed*dt
+        end
+
 
         local left_wall, right_wall, up_wall, down_wall = 0, O_WIN_W, 0, O_WIN_H
         --Check for left or right wall collision
-        if self.pos.x - self.r <= left_wall or self.pos.x + self.r >= right_wall then
-            self.dir.x = -self.dir.x
+        if self.pos.x - self.r <= left_wall then
+            self.dir.x = math.abs(self.dir.x)
+            self.can_hit_paddle = true
+            self.last_brick_hit = nil
+        elseif self.pos.x + self.r >= right_wall then
+            self.dir.x = -math.abs(self.dir.x)
             self.can_hit_paddle = true
             self.last_brick_hit = nil
         end
 
         --Check for up wall collision
         if self.pos.y - self.r <= up_wall then
-            self.dir.y = -self.dir.y
+            self.dir.y = math.abs(self.dir.y)
             self.can_hit_paddle = true
             self.last_brick_hit = nil
         end
 
         --Check for down wall collision
-        if self.pos.y + self.r >= down_wall then
+        if self.pos.y - self.r >= down_wall then
             self:die()
         end
 
@@ -64,6 +85,8 @@ function Ball:update(dt)
         if paddle and  self.can_hit_paddle and Util.circInRect({x = self.pos.x, y = self.pos.y, r = self.r}, {x = paddle.pos.x, y = paddle.pos.y, w = paddle.w, h = paddle.h}) then
             self.can_hit_paddle = false
             self.last_brick_hit = nil
+
+            self.type = paddle.type --Change type of ball based on type of paddle
 
             --Ball is hitting the top or bottom of the paddle
             if self.pos.y <= paddle.pos.y or self.pos.y >= paddle.pos.y + paddle.h then
@@ -117,8 +140,8 @@ function Ball:draw()
 
     b = self
 
-    Color.set(b.color)
-    love.graphics.circle("fill", b.pos.x, b.pos.y, b.r)
+    Color.set(Color.white())
+    love.graphics.draw(self.images[self.type], b.pos.x, b.pos.y, self.rotation, 1, 1, b.r, b.r)
 
 end
 
