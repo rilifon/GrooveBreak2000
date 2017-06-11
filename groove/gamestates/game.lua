@@ -18,6 +18,7 @@ local you_won --If player has won the game already
 local player_lives --How many lives the player start with
 local is_paused = false
 local create_ball_handle
+local game_text
 
 --End game screen
 local win_texts = {"YOU WON", "CONGRATULATIONS", "YOU DA BEST"}
@@ -167,8 +168,17 @@ end
 
 function loadLevel(level)
 
+	--Create bricks
 	for _,brick in pairs(level.bricks) do
 		Brick.create(brick.x, brick.y, brick.type)
+	end
+	--Creat level text, if any
+	if level.text then
+		local font = Font.get("nevis", 70)
+		tx = font:getWidth(level.text)
+		local color = Color.orange()
+		color.a = 170
+		game_text = Text.create(O_WIN_W/2 - tx/2, 1700, level.text, "nevis", 70, color)
 	end
 
 end
@@ -203,19 +213,22 @@ function checkWinCondition()
 				first_button.font_size = 70
 				first_button.border_radius = 30
 			else
-				local width, height = 400, 100
-				local x, y =  O_WIN_W/2 - width/2, O_WIN_H/2 + ty/2 + 80
-				first_button = Button.createRegularButton(x, y, width, height, Color.red(), "next level",
-					function()
-						won_game_text.death = true
-						first_button.death = true
-						second_button.death = true
-						LEVEL_TO_LOAD = LEVELS[LEVEL_TO_LOAD.next]
-						startGame()
-					end
-				)
-				first_button.font_size = 70
-				first_button.border_radius = 30
+				if CUR_LEVEL < NUMBER_LEVELS then
+					local width, height = 400, 100
+					local x, y =  O_WIN_W/2 - width/2, O_WIN_H/2 + ty/2 + 80
+					first_button = Button.createRegularButton(x, y, width, height, Color.red(), "next level",
+						function()
+							won_game_text.death = true
+							first_button.death = true
+							second_button.death = true
+							CUR_LEVEL = CUR_LEVEL + 1
+							LEVEL_TO_LOAD = LEVELS[CUR_LEVEL]
+							startGame()
+						end
+					)
+					first_button.font_size = 70
+					first_button.border_radius = 30
+				end
 			end
 
 			--Go back to menu button
@@ -254,6 +267,7 @@ end
 function startGame()
 
 	you_won = false
+	if game_text then game_text.death = true end
 
 	--Create Paddle
 	local p = Util.findId("player")

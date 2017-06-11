@@ -47,6 +47,8 @@ end
 
 function state:update(dt)
 	if switch == "game" then
+		CUR_LEVEL = 1
+		LEVEL_TO_LOAD = LEVELS[CUR_LEVEL]
 		Gamestate.switch(GS.GAME)
 	elseif switch == "custom" then
 		Gamestate.switch(GS.CSTM_LVLS)

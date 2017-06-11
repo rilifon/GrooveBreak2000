@@ -42,7 +42,9 @@ function setup.config()
     MOUSE_IS_DRAGGING_BRICK = false --If mouse is already dragging a brick, so it doesn't drag anything else
     TOUCH_IS_DRAGGING_BRICK = {} --If a touch id is already dragging a brick, so it doesn't drag anything else
 
-    LEVELS = {} --Levels for the main game mode
+    LEVELS = require "levels" --Levels for the main game mode
+    NUMBER_LEVELS = Util.tableLen(LEVELS) --Number of main levels
+    CUR_LEVEL = nil --Current level the player is playing
     CUSTOM_LEVELS = args.custom_levels --All custom levels created by the player
     LEVEL_TO_LOAD = nil --What level the gamestate "game" should load
 
