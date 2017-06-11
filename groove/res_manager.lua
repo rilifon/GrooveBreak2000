@@ -48,7 +48,8 @@ function res.init()
     for _, f in ipairs(callbacks) do
         registry[f] = love[f] or __NULL__
         love[f] = function(id, x, y, dx, dy, ...)
-            x, y = love.mouse.getPosition() -- fixed
+            x = (x - tx) / scale
+            y = (y - ty) / scale
             dx, dy = dx * res.scale(), dy * res.scale()
             return registry[f](id, x, y, dx, dy, ...)
         end

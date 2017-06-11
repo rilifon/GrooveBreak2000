@@ -101,6 +101,8 @@ end
 
 function state:mousepressed(x, y, button, isTouch)
 
+	if isTouch then return end
+
 	local bricks = Util.findSubtype("bricks")
 
 	if bricks then
@@ -128,6 +130,8 @@ end
 
 function state:mousereleased(x, y, button, isTouch)
 
+	if isTouch then return end
+
 	local bricks = Util.findSubtype("bricks")
 
 	if bricks then
@@ -147,14 +151,6 @@ function state:keypressed(key)
 	end
 
 end
-
-
-function state:touchpressed(id, x, y, dx, dy, pressure)
-
-	checkButtonsCollisions(x, y)
-
-end
-
 
 --LOCAL FUNCTIONS
 
