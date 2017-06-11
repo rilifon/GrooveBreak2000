@@ -235,6 +235,7 @@ function Brick:touchmoved(id, x, y, dx, dy, pressure)
 
         if self.handles["moving"] then MAIN_TIMER:cancel(self.handles["moving"]) end
         self.handles["moving"] = MAIN_TIMER:tween(self.move_duration, self.pos, {x = x - self.w/2}, 'out-quad')
+        
     end
 
 end
