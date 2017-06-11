@@ -218,9 +218,13 @@ function Brick:touchreleased(id, x, y, dx, dy, pressure)
 
     if self.is_button then return end
 
+    Util.findId("editor_box").save_button.text = id .. "aaaa"
+
     --Check if touch released was the one controlling the brick
-    self.touchId = nil
-    TOUCH_IS_DRAGGING_BRICK[id] = nil
+    if id == self.touchId then
+        self.touchId = nil
+        TOUCH_IS_DRAGGING_BRICK[id] = nil
+    end
 
 end
 
@@ -295,6 +299,7 @@ end
 --It will create a draggable button of the same type, and the player will already be dragging it around
 function Brick:generateBrickTouch(id)
 
+    Util.findId("editor_box").save_button.text = id
     local b = bricks_funcs.createDrag(self.pos.x, self.pos.y, self.type)
     b.touchId = id
     TOUCH_IS_DRAGGING_BRICK[id] = true
