@@ -80,11 +80,11 @@ function state:draw()
 
 end
 
-function state:touchpressed(...)
+function state:touchpressed(id, x, y, dx, dy, pressure)
 	local p = Util.findId("player")
 
 	if p then
-		p:touchpressed(...)
+		p:touchpressed(id, x, y, dx, dy, pressure)
 	end
 
 	--Start moving the ball if its static after touching the screen
