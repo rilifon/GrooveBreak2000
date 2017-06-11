@@ -46,6 +46,9 @@ Paddle = Class{
             end
         )
 
+        self.if_pressed_again_will_change_type = false
+        self.time_accepted_between_touch = .4
+
         self.tp = "paddle"
     end,
 }
@@ -97,6 +100,15 @@ end
 
 function Paddle:touchpressed(id, x, y, dx, dy, pressure)
 
+    --Check for double click so the paddle will change type
+    if not self.if_pressed_again_will_change_type then
+        self.if_pressed_again_will_change_type = true
+        if self.handles["double_click"] then MAIN_TIMER:cancel(self.handles["double_click"]) end
+        self.handles["double_click"] = MAIN_TIMER:after(self.time_accepted_between_touch, function() self.if_pressed_again_will_change_type = false end)
+    else
+        self:changeType()
+    end
+
     --Check if touch collides with the paddle, and if so, stores the touch id for checking movement
     if Util.pointInRect({x = x, y = y}, self.touch_collision_shape) then
         self.touchId = id
@@ -127,6 +139,15 @@ function Paddle:mousepressed(x, y, button, isTouch)
     --Leave function if touch, because it will be handled on touchpressed function
     if isTouch then return end
 
+    --Check for double click so the paddle will change type
+    if not self.if_pressed_again_will_change_type then
+        self.if_pressed_again_will_change_type = true
+        if self.handles["double_click"] then MAIN_TIMER:cancel(self.handles["double_click"]) end
+        self.handles["double_click"] = MAIN_TIMER:after(self.time_accepted_between_touch, function() self.if_pressed_again_will_change_type = false end)
+    else
+        self:changeType()
+    end
+
     --Check if mouse collides with the paddle, and if so, paddle is considered being dragged until mouse release
     if button == 1 and Util.pointInRect({x = x, y = y}, self.touch_collision_shape) then
         self.isBeingDragged = true
@@ -153,6 +174,24 @@ function Paddle:move(x)
 
     if p.handles["moving"] then MAIN_TIMER:cancel(p.handles["moving"]) end
     p.handles["moving"] = MAIN_TIMER:tween(p.move_duration, p.pos, {x = x - p.w/2}, 'out-quad')
+
+end
+
+function Paddle:changeType()
+
+    local p = self
+
+    if p.type == "normal" then
+        if love.math.random() >.5 then
+            p.type =  "ice"
+        else
+            p.type = "fire"
+        end
+    elseif p.type == "fire" then
+        p.type = "ice"
+    elseif p.type == "ice" then
+        p.type = "fire"
+    end
 
 end
 

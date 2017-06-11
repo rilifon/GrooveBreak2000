@@ -123,7 +123,14 @@ function Ball:update(dt)
                         self.dir.x = -self.dir.x
                     end
 
-                    brick:got_hit(self)
+                    --Check brick type and ball type to see if it will have an impact
+                    if brick.type == "regular_ice" or brick.type == "tough_ice" or  brick.type == "super_tough_ice" then
+                        if self.type == "fire" then brick:got_hit(self) end
+                    elseif brick.type == "regular_lava" or brick.type == "tough_lava" or  brick.type == "super_tough_lava" then
+                        if self.type == "ice" then brick:got_hit(self) end
+                    elseif brick.type == "regular_rock" or brick.type == "tough_rock" or  brick.type == "super_tough_rock" then
+                        brick:got_hit(self)
+                    end
 
                 end
             end
