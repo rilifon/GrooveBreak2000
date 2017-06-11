@@ -57,7 +57,7 @@ function state:leave()
 	if create_ball_handle then
 		MAIN_TIMER:cancel(create_ball_handle)
 	end
-	
+
 end
 
 
@@ -86,6 +86,7 @@ function state:draw()
 end
 
 function state:touchpressed(id, x, y, dx, dy, pressure)
+
 	local p = Util.findId("player")
 
 	if p then
@@ -122,6 +123,8 @@ end
 
 function state:mousepressed(x, y, button, isTouch)
 
+	if isTouch then return end
+
 	local p = Util.findId("player")
 	if p then
 		p:mousepressed(x, y, button, isTouch)
@@ -143,10 +146,13 @@ function state:mousepressed(x, y, button, isTouch)
 
 end
 
-function state:mousereleased(...)
+function state:mousereleased(x, y, button, isTouch)
+
+	if isTouch then return end
+
 	local p = Util.findId("player")
 	if p then
-		p:mousereleased(...)
+		p:mousereleased(x, y, button, isTouch)
 	end
 
 end

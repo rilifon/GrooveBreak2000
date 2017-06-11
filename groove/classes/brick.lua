@@ -142,6 +142,8 @@ Brick = Class{
         self.is_being_dragged = false
         self.touch_id = nil --Id that is dragguing this brick
 
+        self.move_duration = .1
+
         self.is_button = false
 
         self.tp = "brick"
@@ -156,7 +158,7 @@ Brick = Class{
 
 function Brick:update(dt)
 
-    if self.is_button or self.isFromTouch then return end
+    if self.is_button then return end
 
     --Update brick position if its being dragged
     if self.is_being_dragged then
@@ -234,7 +236,7 @@ function Brick:touchmoved(id, x, y, dx, dy, pressure)
     if id == self.touchId then
 
         if self.handles["moving"] then MAIN_TIMER:cancel(self.handles["moving"]) end
-        self.handles["moving"] = MAIN_TIMER:tween(self.move_duration, self.pos, {x = x - self.w/2}, 'out-quad')
+        self.handles["moving"] = MAIN_TIMER:tween(self.move_duration, self.pos, {x = x - self.w/2, y = y - self.w/2}, 'out-quad')
     end
 
 end
@@ -299,9 +301,8 @@ end
 --It will create a draggable button of the same type, and the player will already be dragging it around
 function Brick:generateBrickTouch(id)
 
-    local b = bricks_funcs.createDrag(self.pos.x, self.pos.y, self.type)
+    local b = brick_funcs.createDrag(self.pos.x, self.pos.y, self.type)
     b.touchId = id
-    b.isFromTouch = true
     TOUCH_IS_DRAGGING_BRICK[id] = true
 
 end
