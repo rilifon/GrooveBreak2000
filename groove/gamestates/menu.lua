@@ -27,13 +27,13 @@ function state:enter()
 
 
 	--Start Game button
-	Button.createRegularButton(400, 400, 400, 400, Color.red(), "Start Game", function() switch = "game" end)
+	Button.createRegularButton(O_WIN_W/2 - 200, 400, 400, 400, Color.red(), "Start Game", function() switch = "game" end)
 
 	--Custom Levels button
-	Button.createRegularButton(400, 900, 400, 400, Color.red(), "Custom Levels", function() switch = "custom" end)
+	Button.createRegularButton(O_WIN_W/2 - 200, 900, 400, 400, Color.red(), "Custom Levels", function() switch = "custom" end)
 
 	--Start Editor button
-	Button.createRegularButton(400, 1400, 400, 400, Color.red(), "Start Editor", function() switch = "editor" end)
+	Button.createRegularButton(O_WIN_W/2 - 200, 1400, 400, 400, Color.red(), "Start Editor", function() switch = "editor" end)
 
 
 end

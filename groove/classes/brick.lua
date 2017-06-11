@@ -32,7 +32,7 @@ Brick = Class{
             width = 180
             height = 75
             color = Color.new(90,120,185)
-            hits_to_break = 3
+            hits_to_break = 2
             image = IMG_ICE_BLOCK
             quads = {}
             for i = 1, hits_to_break do
@@ -44,7 +44,7 @@ Brick = Class{
             width = 180
             height = 75
             color = Color.new(160,130,185)
-            hits_to_break = 5
+            hits_to_break = 3
             image = IMG_ICE_BLOCK
             quads = {}
             for i = 1, hits_to_break do
@@ -69,7 +69,7 @@ Brick = Class{
             width = 180
             height = 75
             color = Color.new(90,120,185)
-            hits_to_break = 3
+            hits_to_break = 2
             image = IMG_LAVA_BLOCK
             quads = {}
             for i = 1, hits_to_break do
@@ -81,7 +81,7 @@ Brick = Class{
             width = 180
             height = 75
             color = Color.new(160,130,185)
-            hits_to_break = 5
+            hits_to_break = 3
             image = IMG_LAVA_BLOCK
             quads = {}
             for i = 1, hits_to_break do
@@ -106,7 +106,7 @@ Brick = Class{
             width = 180
             height = 75
             color = Color.new(90,120,185)
-            hits_to_break = 3
+            hits_to_break = 2
             image = IMG_ROCK_BLOCK
             quads = {}
             for i = 1, hits_to_break do
@@ -118,7 +118,7 @@ Brick = Class{
             width = 180
             height = 75
             color = Color.new(160,130,185)
-            hits_to_break = 5
+            hits_to_break = 3
             image = IMG_ROCK_BLOCK
             quads = {}
             for i = 1, hits_to_break do
@@ -283,7 +283,7 @@ function Brick:got_hit(ball)
     if self.hits_to_break <= 0 then
         self:die()
     else
-        self.cur_quad = self.cur_quad + 1
+        self.cur_quad = self.cur_quad + 2
     end
 
 end
