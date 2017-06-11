@@ -68,11 +68,21 @@ EditorBox = Class{
                 end
             end)
 
-        local width, height = 300, 100
-        self.save_button = RegularButton(O_WIN_W/2 - width/2, 0, width, height, Color.red(), "save",
+        local width, height = 200, 100
+        self.save_button = RegularButton(O_WIN_W - width, 0, width, height, Color.red(), "save",
             function()
-                editor_funcs.save_custom_level()
-            end)
+                editor_funcs.save_custom_level(self)
+            end
+        )
+        self.level_name = "no name"
+        local width, height = 1300, 100
+        self.level_name_button = RegularButton(0, 0, width, height, Color.purple(), "press here for a random level name",
+            function()
+                local name = editor_funcs.getRandomName()
+                self.level_name_button.text = name
+                self.level_name = name
+            end
+        )
 
         self.tp = "editor_box" --Type of this class
     end
@@ -90,6 +100,8 @@ function EditorBox:draw()
     self.prev_page_button:draw()
     self.next_page_button:draw()
     self.save_button:draw()
+    self.level_name_button:draw()
+
 
 
     --Draw page objects
@@ -147,7 +159,7 @@ end
 function EditorBox:checkButtonsCollisions(x, y)
 
 	--Check collision with regular buttons
-	buts = {self.prev_page_button, self.next_page_button, self.save_button}
+	buts = {self.prev_page_button, self.next_page_button, self.save_button, self.level_name_button}
 	for _, but in pairs(buts) do
 		if Util.pointInRect({x = x, y = y}, {x = but.pos.x, y = but.pos.y, w = but.w, h = but.h}) then
 			but.func()
@@ -167,10 +179,10 @@ function editor_funcs.create()
     return b
 end
 
-function editor_funcs.save_custom_level()
+function editor_funcs.save_custom_level(editor)
     local t = {
         bricks = {},
-        name = love.math.random(1,100),
+        name = editor.level_name,
         type = "custom"
     }
     local bricks = Util.findSubtype("bricks")
@@ -184,6 +196,18 @@ function editor_funcs.save_custom_level()
 
     Gamestate.switch(GS.MENU) --Go back to menu
 
+end
+
+function editor_funcs.getRandomName()
+
+    local name
+    local prefix = {"Super", "Mega", "Crazy", "Easy", "Hard"}
+    local middle = {"Brick", "Firey", "Icey"}
+    local pos = {"Level", "World"}
+
+    name = Util.randomElement(prefix) .. " " .. Util.randomElement(middle) .. " " ..  Util.randomElement(pos)
+
+    return name
 end
 
 --Return functions

@@ -23,6 +23,8 @@ function draw.allTables()
 
     DrawTable(DRAW_TABLE.L3) --Paddle/Editor Box
 
+    DrawTable(DRAW_TABLE.L4) --Name creator
+
     CAM:detach() --Stop tracking camera
 
     DrawTable(DRAW_TABLE.GUI)

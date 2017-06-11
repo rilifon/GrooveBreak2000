@@ -28,8 +28,6 @@ function setup.config()
     IMG_BG = love.graphics.newImage("assets/images/bg.png")
 
 
-
-
     --GLOBAL VARIABLES--
     DEBUG = false --DEBUG mode status
 
@@ -60,6 +58,7 @@ function setup.config()
         L1  = {},    --Layer 1
         L2  = {},    --Layer 2
         L3  = {},    --Layer 3
+        L4  = {},    --Layer 4
         GUI = {}     --Graphic User Interface (top layer, last to draw)
     }
 

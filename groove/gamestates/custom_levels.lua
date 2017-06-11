@@ -27,7 +27,7 @@ function state:enter()
 
 
 	--Title
-	Text.create(400, 200, "CUSTOM LEVELS", "nevis", 90)
+	Text.create(400, 200, "CUSTOM LEVELS", "nevis", 90, Color.orange())
 
 	createCustomLevelsButtons()
 
