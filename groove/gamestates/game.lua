@@ -17,6 +17,7 @@ local switch = nil --If game should swith to another state
 local you_won --If player has won the game already
 local player_lives --How many lives the player start with
 local is_paused = false
+local create_ball_handle
 
 --End game screen
 local win_texts = {"YOU WON", "CONGRATULATIONS", "YOU DA BEST"}
@@ -53,6 +54,10 @@ function state:leave()
 
 	Util.destroyAll("force")
 
+	if create_ball_handle then
+		MAIN_TIMER:cancel(create_ball_handle)
+	end
+	
 end
 
 
@@ -346,7 +351,7 @@ Signal.register('lost_live', function()
 		p.lives = p.lives - 1 --Update paddles lives
 
 		if p.lives > 0 then
-			MAIN_TIMER:after(1,
+			create_ball_handle = MAIN_TIMER:after(1,
 				function()
 					spawnBall()
 				end

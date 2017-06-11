@@ -228,7 +228,7 @@ end
 
 function Brick:touchmoved(id, x, y, dx, dy, pressure)
 
-    if not self.can_drag or self.is_button then return end
+    if not self.can_drag or self.is_button or not TOUCH_IS_DRAGGING_BRICK[id] then return end
 
     --If touch moving is the one controlling the brick, move the paddle
     if id == self.touchId then
