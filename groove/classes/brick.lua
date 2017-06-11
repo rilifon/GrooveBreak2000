@@ -112,8 +112,8 @@ Brick = Class{
             for i = 1, hits_to_break do
                 quads[i] = love.graphics.newQuad(0, (i-1)*height/sy, width/sx, height/sy, image:getDimensions())
             end
-            sx = 1.5
         elseif _type == "super_tough_rock" then
+            sx = 1.5
             sy = 1.5
             width = 180
             height = 75
@@ -141,8 +141,6 @@ Brick = Class{
         self.can_drag = false --If you can drag this brick around
         self.is_being_dragged = false
         self.touch_id = nil --Id that is dragguing this brick
-        self.is_drag_by_touch = false
-
 
         self.is_button = false
 
@@ -158,7 +156,7 @@ Brick = Class{
 
 function Brick:update(dt)
 
-    if self.is_button then return end
+    if self.is_button or self.isFromTouch then return end
 
     --Update brick position if its being dragged
     if self.is_being_dragged then
@@ -204,11 +202,12 @@ function Brick:touchpressed(id, x, y, dx, dy, pressure)
             self:generateBrickTouch(id)
         end
     else
-        if self.can_drag == false then return end
+        if self.can_drag == false or TOUCH_IS_DRAGGING_BRICK[id] then return end
 
         --Check if touch collides with the brick, and if so, stores the touch id for checking movement
         if Util.pointInRect({x = x, y = y}, {x = self.pos.x, y = self.pos.y, w = self.w, h = self.h}) then
-            self.is_drag_by_touch = true
+            self.touchId = id
+            TOUCH_IS_DRAGGING_BRICK[id] = true
         end
 
     end
@@ -219,16 +218,20 @@ function Brick:touchreleased(id, x, y, dx, dy, pressure)
 
     if self.is_button then return end
 
-    self.is_drag_by_touch = false
+    --Check if touch released was the one controlling the brick
+    if id == self.touchId then
+        self.touchId = nil
+        TOUCH_IS_DRAGGING_BRICK[id] = nil
+    end
 
 end
 
 function Brick:touchmoved(id, x, y, dx, dy, pressure)
 
-    if not self.can_drag or self.is_button then return end
+    if not self.can_drag or self.is_button or not TOUCH_IS_DRAGGING_BRICK[id] then return end
 
     --If touch moving is the one controlling the brick, move the paddle
-    if self.is_drag_by_touch then
+    if id == self.touchId then
 
         if self.handles["moving"] then MAIN_TIMER:cancel(self.handles["moving"]) end
         self.handles["moving"] = MAIN_TIMER:tween(self.move_duration, self.pos, {x = x - self.w/2}, 'out-quad')
@@ -237,6 +240,8 @@ function Brick:touchmoved(id, x, y, dx, dy, pressure)
 end
 
 function Brick:mousepressed(x, y, button, isTouch)
+
+    if isTouch then return end
 
     --Check if mouse collides with a brick button
     if self.is_button and button == 1 and Util.pointInRect({x = x, y = y}, {x = self.pos.x, y = self.pos.y, w = self.w, h = self.h}) then
@@ -295,7 +300,9 @@ end
 function Brick:generateBrickTouch(id)
 
     local b = bricks_funcs.createDrag(self.pos.x, self.pos.y, self.type)
-    b.is_drag_by_touch = true
+    b.touchId = id
+    b.isFromTouch = true
+    TOUCH_IS_DRAGGING_BRICK[id] = true
 
 end
 
