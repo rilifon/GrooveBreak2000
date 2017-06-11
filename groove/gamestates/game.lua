@@ -86,7 +86,6 @@ function state:draw()
 end
 
 function state:touchpressed(id, x, y, dx, dy, pressure)
-
 	local p = Util.findId("player")
 
 	if p then
@@ -123,8 +122,6 @@ end
 
 function state:mousepressed(x, y, button, isTouch)
 
-	if isTouch then return end
-
 	local p = Util.findId("player")
 	if p then
 		p:mousepressed(x, y, button, isTouch)
@@ -146,13 +143,10 @@ function state:mousepressed(x, y, button, isTouch)
 
 end
 
-function state:mousereleased(x, y, button, isTouch)
-
-	if isTouch then return end
-
+function state:mousereleased(...)
 	local p = Util.findId("player")
 	if p then
-		p:mousereleased(x, y, button, isTouch)
+		p:mousereleased(...)
 	end
 
 end
@@ -290,7 +284,7 @@ end
 
 --Creates a ball
 function spawnBall()
-	local x, y = O_WIN_W/2, O_WIN_H/2 --Initial ball position in the middle of the screen
+	local x, y = BALL_START_POS_X, BALL_START_POS_Y--Initial ball position
 	local angle = math.pi/2 + love.math.random()*2*math.pi/8 - math.pi/8 --Get an initial random angle between 247.5 and 292.5
 	local dx, dy = math.cos(angle), math.sin(angle) --Random initial direction for ball, going downwards
 	Ball.create(x, y, dx, dy, "ball")

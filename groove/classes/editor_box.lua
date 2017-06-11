@@ -106,6 +106,16 @@ function EditorBox:draw()
     local text = self.cur_page.."/"..self.max_page
     love.graphics.print(text, self.pos.x + 10, self.pos.y)
 
+    --Draw ball start position
+    local c = Color.white()
+    c.a = 120
+    Color.set(c)
+    love.graphics.circle("fill", BALL_START_POS_X, BALL_START_POS_Y, 60)
+    Color.set(Color.red())
+    local f = Font.set("nevis", 40)
+    love.graphics.printf("ball", BALL_START_POS_X - f:getWidth("ball")/2, BALL_START_POS_Y - f:getHeight("ball")/2, 100)
+
+
 end
 
 function EditorBox:mousepressed(x, y, ...)

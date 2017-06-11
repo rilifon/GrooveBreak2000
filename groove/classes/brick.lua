@@ -23,7 +23,7 @@ Brick = Class{
             hits_to_break = 1
             image = IMG_ICE_BLOCK
             quads = {}
-            for i = 1, hits_to_break do
+            for i = 1, 5 do
                 quads[i] = love.graphics.newQuad(0, (i-1)*height/sy, width/sx, height/sy, image:getDimensions())
             end
         elseif _type == "tough_ice" then
@@ -35,7 +35,7 @@ Brick = Class{
             hits_to_break = 2
             image = IMG_ICE_BLOCK
             quads = {}
-            for i = 1, hits_to_break do
+            for i = 1, 5 do
                 quads[i] = love.graphics.newQuad(0, (i-1)*height/sy, width/sx, height/sy, image:getDimensions())
             end
         elseif _type == "super_tough_ice" then
@@ -47,7 +47,7 @@ Brick = Class{
             hits_to_break = 3
             image = IMG_ICE_BLOCK
             quads = {}
-            for i = 1, hits_to_break do
+            for i = 1, 5 do
                 quads[i] = love.graphics.newQuad(0, (i-1)*height/sy, width/sx, height/sy, image:getDimensions())
             end
         --LAVA BLOCKS
@@ -60,7 +60,7 @@ Brick = Class{
             hits_to_break = 1
             image = IMG_LAVA_BLOCK
             quads = {}
-            for i = 1, hits_to_break do
+            for i = 1, 5 do
                 quads[i] = love.graphics.newQuad(0, (i-1)*height/sy, width/sx, height/sy, image:getDimensions())
             end
         elseif _type == "tough_lava" then
@@ -72,7 +72,7 @@ Brick = Class{
             hits_to_break = 2
             image = IMG_LAVA_BLOCK
             quads = {}
-            for i = 1, hits_to_break do
+            for i = 1, 5 do
                 quads[i] = love.graphics.newQuad(0, (i-1)*height/sy, width/sx, height/sy, image:getDimensions())
             end
         elseif _type == "super_tough_lava" then
@@ -84,7 +84,7 @@ Brick = Class{
             hits_to_break = 3
             image = IMG_LAVA_BLOCK
             quads = {}
-            for i = 1, hits_to_break do
+            for i = 1, 5 do
                 quads[i] = love.graphics.newQuad(0, (i-1)*height/sy, width/sx, height/sy, image:getDimensions())
             end
         --ROCK BLOCKS
@@ -97,7 +97,7 @@ Brick = Class{
             hits_to_break = 1
             image = IMG_ROCK_BLOCK
             quads = {}
-            for i = 1, hits_to_break do
+            for i = 1, 5 do
                 quads[i] = love.graphics.newQuad(0, (i-1)*height/sy, width/sx, height/sy, image:getDimensions())
             end
         elseif _type == "tough_rock" then
@@ -109,7 +109,7 @@ Brick = Class{
             hits_to_break = 2
             image = IMG_ROCK_BLOCK
             quads = {}
-            for i = 1, hits_to_break do
+            for i = 1, 5 do
                 quads[i] = love.graphics.newQuad(0, (i-1)*height/sy, width/sx, height/sy, image:getDimensions())
             end
         elseif _type == "super_tough_rock" then
@@ -121,7 +121,7 @@ Brick = Class{
             hits_to_break = 3
             image = IMG_ROCK_BLOCK
             quads = {}
-            for i = 1, hits_to_break do
+            for i = 1, 5 do
                 quads[i] = love.graphics.newQuad(0, (i-1)*height/sy, width/sx, height/sy, image:getDimensions())
             end
         end

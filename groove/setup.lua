@@ -38,6 +38,9 @@ function setup.config()
     O_WIN_W = 1536 --Default width of the game window
     O_WIN_H = 2276 --Default height of the game window
 
+    BALL_START_POS_X = O_WIN_W/2
+    BALL_START_POS_Y = 3*O_WIN_H/5
+
     MOUSE_IS_DRAGGING_BRICK = false --If mouse is already dragging a brick, so it doesn't drag anything else
     TOUCH_IS_DRAGGING_BRICK = {} --If a touch id is already dragging a brick, so it doesn't drag anything else
 
