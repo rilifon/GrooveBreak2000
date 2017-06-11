@@ -219,10 +219,8 @@ function Brick:touchreleased(id, x, y, dx, dy, pressure)
     if self.is_button then return end
 
     --Check if touch released was the one controlling the brick
-    if id == self.touchId then
-        self.touchId = nil
-        TOUCH_IS_DRAGGING_BRICK[id] = nil
-    end
+    self.touchId = nil
+    TOUCH_IS_DRAGGING_BRICK[id] = nil
 
 end
 
