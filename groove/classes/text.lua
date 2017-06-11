@@ -26,14 +26,18 @@ Text = Class{
 
 
 function Text:draw()
-    local t, text, color
+    local t = self
 
-    t = self
-
+    local limit = 9*O_WIN_W/10
     --Draws button text
     Color.set(self.color)
-    Font.set(t.font_name, t.font_size)
-    love.graphics.print(t.text, t.pos.x, t.pos.y)
+    local font = Font.set(t.font_name, t.font_size)
+    local tx = font:getWidth(t.text)
+    if tx >= limit then
+        love.graphics.printf(t.text, t.pos.x, t.pos.y, limit, "center")
+    else
+        love.graphics.print(t.text, t.pos.x, t.pos.y)
+    end
 
 end
 

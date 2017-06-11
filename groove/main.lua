@@ -22,6 +22,7 @@ require "classes.ball"
 require "classes.brick"
 require "classes.button"
 require "classes.editor_box"
+require "classes.life_indicator"
 require "classes.particle"
 
 --MY MODULES

@@ -21,6 +21,11 @@ function state:enter()
 
 	LEVEL_TO_LOAD = nil
 
+	local img = IMAGE(0,0,IMG_BG)
+	img:addElement(DRAW_TABLE.BG, nil, "bg")
+	img.sx, img.sy = 3, 3
+
+
 	--Start Game button
 	Button.createRegularButton(400, 400, 400, 400, Color.red(), "Start Game", function() switch = "game" end)
 

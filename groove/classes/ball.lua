@@ -128,9 +128,6 @@ function Ball:update(dt)
                 end
             end
         end
-
-
-        --Invert y direction
     end
 
 end
@@ -147,6 +144,7 @@ end
 
 function Ball:die()
     self.death = true
+    Signal.emit("lost_live")
 end
 
 ---------------------

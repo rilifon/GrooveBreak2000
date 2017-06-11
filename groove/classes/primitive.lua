@@ -238,3 +238,38 @@ function CIRC:draw()
     love.graphics.circle(p.mode, p.pos.x, p.pos.y, p.r)
 
 end
+
+-----------------
+--OTHER OBJECTS--
+-----------------
+
+--Image: is a positionable object that draws an image
+IMAGE = Class{
+    __includes = {ELEMENT, POS},
+    init = function(self, _x, _y, _image, _sx, _sy)
+
+        POS.init(self, _x, _y)
+
+        self.image = _image
+        self.sx = _sx or 1
+        self.sy = _sy or 1
+
+
+        ELEMENT.init(self)
+
+        self.tp = "image"
+    end
+}
+
+
+--Draws the image
+function IMAGE:draw()
+    local img
+
+    img = self
+
+    Color.set(Color.white())
+
+    love.graphics.draw(img.image, img.pos.x, img.pos.y, 0, img.sx, img.sy)
+
+end

@@ -20,6 +20,11 @@ function state:enter()
 
 	switch = nil
 
+	local img = IMAGE(0,0,IMG_BG)
+	img:addElement(DRAW_TABLE.BG, nil, "bg")
+	img.sx, img.sy = 3, 3
+
+
 	Editor_Box.create()
 
 end
