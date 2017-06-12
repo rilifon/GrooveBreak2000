@@ -33,6 +33,9 @@ function state:enter()
 	img:addElement(DRAW_TABLE.BG, nil, "bg")
 	img.sx, img.sy = 3, 3
 
+	--Title
+	IMAGE( 300, 300, IMG_LOGO):addElement(DRAW_TABLE.GUI, nil, "logo")
+	
 	--Start Game button
 	Button.createRegularButton(O_WIN_W/2 - 150, 600, 400, 300, Color.red(), "Start Game", function() switch = "game"; SFX_MENU_SELECT:play() end).border_radius = 30
 

@@ -1,0 +1,17 @@
+RELATÓRIO DO EP 2
+
+Guilherme Schuzter, NUSP 8568544
+Ricardo Lira da Fonseca, NUSP 8536131
+
+Fizemos um brick breaker na framework love2d. Utilizamos 3 bibliotecas externas para ajudar no nosso trabalho:
+
+HUMP - Possue varias implementações basicas uteis em desenvolvimento de jogos, incluindo uma implementação
+de classes, camera, gamestates e muito mais.
+
+TSerial - Consegue transformar e ler tables de lua para string, o que foi muito util para podermos
+salvar arquivos de informações do usuário
+
+slam - biblioteca que facilita a utilização de objetos source (arquivos de som) na love. A melhor
+funcionalidade dele é poder reproduzir o mesmo source multiplas vezes criando instancias novas toda hora.
+
+-----------------------------------------------------------------

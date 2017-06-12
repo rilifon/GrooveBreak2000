@@ -26,6 +26,8 @@ function setup.config()
     IMG_ICE_BALL = love.graphics.newImage("assets/images/ice_ball.png")
     IMG_FIRE_BALL = love.graphics.newImage("assets/images/fire_ball.png")
     IMG_BG = love.graphics.newImage("assets/images/bg.png")
+    IMG_LOGO = love.graphics.newImage("assets/images/logo.png")
+
 
 
     --GLOBAL VARIABLES--
