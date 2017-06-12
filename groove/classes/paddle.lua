@@ -21,7 +21,7 @@ Paddle = Class{
 
         self.move_duration = .1
 
-        self.initial_lives = 2
+        self.initial_lives = 5
         self.lives = self.initial_lives --Number of lives the paddle currently has
 
         self.type = "normal" --What type the paddle is (can be "normal", "ice" or "fire")
