@@ -87,6 +87,7 @@ function setup.config()
     SFX_ROCK_BRICK_HIT  = love.audio.newSource("assets/audio/sfx/pedra_batendo.wav")
     SFX_ROCK_BRICK_BREAK  = love.audio.newSource("assets/audio/sfx/pedra_quebrando.wav")
     SFX_DUMMY_HIT  = love.audio.newSource("assets/audio/sfx/impacto_sem_efeito.wav")
+    SFX_NORMAL_HIT  = love.audio.newSource("assets/audio/sfx/bate_na_pa.wav")
     SFX_MENU_SELECT  = love.audio.newSource("assets/audio/sfx/menu_select.wav")
     SFX_GAMEOVER  = love.audio.newSource("assets/audio/sfx/perdeu_todas_as_stocks.wav")
     SFX_LOST_STOCK  = love.audio.newSource("assets/audio/sfx/perdeu_uma_stock.wav")
@@ -101,7 +102,13 @@ function setup.config()
     SFX_ICE_PERC:setVolume(.08)
     SFX_ICE_PERC:setLooping(true)
 
-    BGM = love.audio.newSource("assets/audio/tracks/ambience.mp3")
+    BGM_GAME = love.audio.newSource("assets/audio/tracks/ambience.mp3")
+    BGM_GAME:setLooping(true)
+    BGM_GAME_IS_PLAYING = nil
+    BGM_MENU = love.audio.newSource("assets/audio/tracks/menu.mp3")
+    BGM_MENU:setLooping(true)
+    BGM_MENU_IS_PLAYING = nil
+
 
 
 

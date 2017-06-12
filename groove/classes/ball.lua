@@ -99,7 +99,7 @@ function Ball:update(dt)
             elseif self.type == "ice" and paddle.type == "fire" then
                 SFX_BALL_ON_FIRE_PADDLE:play()
             else
-                SFX_DUMMY_HIT:play()
+                SFX_NORMAL_HIT:play()
             end
             self.type = paddle.type --Change type of ball based on type of paddle
 

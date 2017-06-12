@@ -49,6 +49,14 @@ function state:enter()
 
 	startGame()
 
+	if BGM_MENU_IS_PLAYING then
+		BGM_MENU_IS_PLAYING:stop()
+		BGM_MENU_IS_PLAYING = nil
+	end
+	if not BGM_GAME_IS_PLAYING then
+		BGM_GAME_IS_PLAYING = BGM_GAME:play()
+	end
+
 end
 
 function state:leave()

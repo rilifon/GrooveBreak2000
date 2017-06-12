@@ -64,8 +64,6 @@ function love.load()
 
     Gamestate.switch(GS.MENU) --Jump to the inicial state
 
-    BGM:play()
-
 end
 
 --Function called when love is quitting
