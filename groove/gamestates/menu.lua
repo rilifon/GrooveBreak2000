@@ -26,13 +26,13 @@ function state:enter()
 	img.sx, img.sy = 3, 3
 
 	--Start Game button
-	Button.createRegularButton(O_WIN_W/2 - 200, 400, 400, 400, Color.red(), "Start Game", function() switch = "game"; SFX_MENU_SELECT:play() end)
+	Button.createRegularButton(O_WIN_W/2 - 150, 600, 400, 300, Color.red(), "Start Game", function() switch = "game"; SFX_MENU_SELECT:play() end).border_radius = 30
 
 	--Custom Levels button
-	Button.createRegularButton(O_WIN_W/2 - 200, 900, 400, 400, Color.red(), "Custom Levels", function() switch = "custom"; SFX_MENU_SELECT:play() end)
+	Button.createRegularButton(O_WIN_W/2 - 150, 1100, 400, 300, Color.red(), "Custom Levels", function() switch = "custom"; SFX_MENU_SELECT:play() end).border_radius = 30
 
 	--Start Editor button
-	Button.createRegularButton(O_WIN_W/2 - 200, 1400, 400, 400, Color.red(), "Start Editor", function() switch = "editor"; SFX_MENU_SELECT:play() end)
+	Button.createRegularButton(O_WIN_W/2 - 150, 1600, 400, 300, Color.red(), "Start Editor", function() switch = "editor"; SFX_MENU_SELECT:play() end).border_radius = 30
 
 
 end
