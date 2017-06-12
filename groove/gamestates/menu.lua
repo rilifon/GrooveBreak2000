@@ -21,6 +21,14 @@ function state:enter()
 
 	LEVEL_TO_LOAD = nil
 
+	if BGM_GAME_IS_PLAYING then
+		BGM_GAME_IS_PLAYING:stop()
+		BGM_GAME_IS_PLAYING = nil
+	end
+	if not BGM_MENU_IS_PLAYING then
+		BGM_MENU_IS_PLAYING = BGM_MENU:play()
+	end
+
 	local img = IMAGE(0,0,IMG_BG)
 	img:addElement(DRAW_TABLE.BG, nil, "bg")
 	img.sx, img.sy = 3, 3
@@ -45,6 +53,7 @@ end
 
 
 function state:update(dt)
+
 	if switch == "game" then
 		CUR_LEVEL = 1
 		LEVEL_TO_LOAD = LEVELS[CUR_LEVEL]
