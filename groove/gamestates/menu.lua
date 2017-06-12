@@ -34,16 +34,16 @@ function state:enter()
 	img.sx, img.sy = 3, 3
 
 	--Title
-	IMAGE( 300, 300, IMG_LOGO):addElement(DRAW_TABLE.GUI, nil, "logo")
-	
+	IMAGE( 250, 100, IMG_LOGO, 3, 3):addElement(DRAW_TABLE.GUI, nil, "logo")
+
 	--Start Game button
-	Button.createRegularButton(O_WIN_W/2 - 150, 600, 400, 300, Color.red(), "Start Game", function() switch = "game"; SFX_MENU_SELECT:play() end).border_radius = 30
+	Button.createRegularButton(O_WIN_W/2 - 150, 800, 400, 300, Color.red(), "Start Game", function() switch = "game"; SFX_MENU_SELECT:play() end).border_radius = 30
 
 	--Custom Levels button
-	Button.createRegularButton(O_WIN_W/2 - 150, 1100, 400, 300, Color.red(), "Custom Levels", function() switch = "custom"; SFX_MENU_SELECT:play() end).border_radius = 30
+	Button.createRegularButton(O_WIN_W/2 - 150, 1300, 400, 300, Color.red(), "Custom Levels", function() switch = "custom"; SFX_MENU_SELECT:play() end).border_radius = 30
 
 	--Start Editor button
-	Button.createRegularButton(O_WIN_W/2 - 150, 1600, 400, 300, Color.red(), "Start Editor", function() switch = "editor"; SFX_MENU_SELECT:play() end).border_radius = 30
+	Button.createRegularButton(O_WIN_W/2 - 150, 1800, 400, 300, Color.red(), "Start Editor", function() switch = "editor"; SFX_MENU_SELECT:play() end).border_radius = 30
 
 
 end

@@ -8,7 +8,7 @@ function love.conf(t)
     t.externalstorage = false           -- True to save files (and read from the save directory) in external storage on Android (boolean)
     t.gammacorrect = false              -- Enable gamma-correct rendering, when supported by the system (boolean)
 
-    t.window.title = "GrooveBreak2000"     -- The window title (string)
+    t.window.title = "SpaceBricks"         -- The window title (string)
     t.window.icon = nil                    -- Filepath to an image to use as the window's icon (string)
     t.window.width = 1536/3                -- The window width (number)
     t.window.height = 2276/3               -- The window height (number)
