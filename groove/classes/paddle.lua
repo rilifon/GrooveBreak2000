@@ -180,17 +180,25 @@ end
 function Paddle:changeType()
 
     local p = self
-
+    SFX_CHANGE_TYPE:play()
     if p.type == "normal" then
         if love.math.random() >.5 then
             p.type =  "ice"
+            SFX_FIRE_PERC:pause()
+            SFX_ICE_PERC:play()
         else
             p.type = "fire"
+            SFX_FIRE_PERC:play()
+            SFX_ICE_PERC:pause()
         end
     elseif p.type == "fire" then
         p.type = "ice"
+        SFX_FIRE_PERC:pause()
+        SFX_ICE_PERC:play()
     elseif p.type == "ice" then
         p.type = "fire"
+        SFX_FIRE_PERC:play()
+        SFX_ICE_PERC:pause()
     end
 
 end

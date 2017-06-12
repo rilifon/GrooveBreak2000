@@ -78,7 +78,35 @@ function setup.config()
         --
 
     --AUDIO--
-       --
+    SFX_BALL_ON_FIRE_PADDLE = love.audio.newSource("assets/audio/sfx/bola_pegando_fogo.wav")
+    SFX_BALL_ON_ICE_PADDLE = love.audio.newSource("assets/audio/sfx/bola_pegando_gelo.wav")
+    SFX_ICE_BRICK_HIT  = love.audio.newSource("assets/audio/sfx/gelo_hit.wav")
+    SFX_ICE_BRICK_BREAK  = love.audio.newSource("assets/audio/sfx/gelo_quebrando.wav")
+    SFX_FIRE_BRICK_HIT  = love.audio.newSource("assets/audio/sfx/lava_hit.wav")
+    SFX_FIRE_BRICK_BREAK  = love.audio.newSource("assets/audio/sfx/lava_quebrando.wav")
+    SFX_ROCK_BRICK_HIT  = love.audio.newSource("assets/audio/sfx/pedra_batendo.wav")
+    SFX_ROCK_BRICK_BREAK  = love.audio.newSource("assets/audio/sfx/pedra_quebrando.wav")
+    SFX_DUMMY_HIT  = love.audio.newSource("assets/audio/sfx/impacto_sem_efeito.wav")
+    SFX_MENU_SELECT  = love.audio.newSource("assets/audio/sfx/menu_select.wav")
+    SFX_GAMEOVER  = love.audio.newSource("assets/audio/sfx/perdeu_todas_as_stocks.wav")
+    SFX_LOST_STOCK  = love.audio.newSource("assets/audio/sfx/perdeu_uma_stock.wav")
+    SFX_FIRE_BRICK_HIT  = love.audio.newSource("assets/audio/sfx/lava_hit.wav")
+    SFX_VICTORY  = love.audio.newSource("assets/audio/sfx/vitoria.wav")
+    SFX_CHANGE_TYPE  = love.audio.newSource("assets/audio/sfx/troca_shovel.wav")
+
+    SFX_FIRE_PERC  = love.audio.newSource("assets/audio/sfx/perc_fogo.wav")
+    SFX_FIRE_PERC:setVolume(.9)
+    SFX_FIRE_PERC:setLooping(true)
+    SFX_ICE_PERC  = love.audio.newSource("assets/audio/sfx/perc_gelo.wav")
+    SFX_ICE_PERC:setVolume(.08)
+    SFX_ICE_PERC:setLooping(true)
+
+    BGM = love.audio.newSource("assets/audio/tracks/ambience.mp3")
+
+
+
+
+
 
 
 

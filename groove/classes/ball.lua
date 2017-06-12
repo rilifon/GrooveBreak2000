@@ -94,6 +94,13 @@ function Ball:update(dt)
             self.can_hit_paddle = false
             self.last_brick_hit = nil
 
+            if self.type == "fire" and paddle.type == "ice" then
+                SFX_BALL_ON_ICE_PADDLE:play()
+            elseif self.type == "ice" and paddle.type == "fire" then
+                SFX_BALL_ON_FIRE_PADDLE:play()
+            else
+                SFX_DUMMY_HIT:play()
+            end
             self.type = paddle.type --Change type of ball based on type of paddle
 
             --Ball is hitting the top or bottom of the paddle
@@ -133,9 +140,9 @@ function Ball:update(dt)
 
                     --Check brick type and ball type to see if it will have an impact
                     if brick.type == "regular_ice" or brick.type == "tough_ice" or  brick.type == "super_tough_ice" then
-                        if self.type == "fire" then brick:got_hit(self) end
+                        if self.type == "fire" then brick:got_hit(self) else SFX_DUMMY_HIT:play() end
                     elseif brick.type == "regular_lava" or brick.type == "tough_lava" or  brick.type == "super_tough_lava" then
-                        if self.type == "ice" then brick:got_hit(self) end
+                        if self.type == "ice" then brick:got_hit(self) else SFX_DUMMY_HIT:play() end
                     elseif brick.type == "regular_rock" or brick.type == "tough_rock" or  brick.type == "super_tough_rock" then
                         brick:got_hit(self)
                     end

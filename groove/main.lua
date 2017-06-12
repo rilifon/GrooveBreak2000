@@ -9,6 +9,7 @@ Signal    = require 'extra_libs.hump.signal'
 --OTHER EXTRA LIBS
 
 require "extra_libs.Tserial" --For packing and unpacking tables
+require "extra_libs.slam" --For playing one source multiple times
 
 
 --CLASSES
@@ -62,6 +63,8 @@ function love.load()
     Res.init() --Setup support for multiple resolutions.; Must be called after gamestt
 
     Gamestate.switch(GS.MENU) --Jump to the inicial state
+
+    BGM:play()
 
 end
 
