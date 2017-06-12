@@ -25,15 +25,14 @@ function state:enter()
 	img:addElement(DRAW_TABLE.BG, nil, "bg")
 	img.sx, img.sy = 3, 3
 
-
 	--Start Game button
-	Button.createRegularButton(O_WIN_W/2 - 200, 400, 400, 400, Color.red(), "Start Game", function() switch = "game" end)
+	Button.createRegularButton(O_WIN_W/2 - 200, 400, 400, 400, Color.red(), "Start Game", function() switch = "game"; SFX_MENU_SELECT:play() end)
 
 	--Custom Levels button
-	Button.createRegularButton(O_WIN_W/2 - 200, 900, 400, 400, Color.red(), "Custom Levels", function() switch = "custom" end)
+	Button.createRegularButton(O_WIN_W/2 - 200, 900, 400, 400, Color.red(), "Custom Levels", function() switch = "custom"; SFX_MENU_SELECT:play() end)
 
 	--Start Editor button
-	Button.createRegularButton(O_WIN_W/2 - 200, 1400, 400, 400, Color.red(), "Start Editor", function() switch = "editor" end)
+	Button.createRegularButton(O_WIN_W/2 - 200, 1400, 400, 400, Color.red(), "Start Editor", function() switch = "editor"; SFX_MENU_SELECT:play() end)
 
 
 end

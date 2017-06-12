@@ -190,6 +190,8 @@ function checkWinCondition()
 	if Util.tableLen(Util.findSubtype("bricks")) <= 0 then
 		you_won = true
 
+		SFX_VICTORY:play()
+
 		--Create win text
 		local text = Util.randomElement(win_texts)
 		local font = Font.get("nevis", 120)
@@ -365,12 +367,14 @@ Signal.register('lost_live', function()
 		p.lives = p.lives - 1 --Update paddles lives
 
 		if p.lives > 0 then
+			SFX_LOST_STOCK:play()
 			create_ball_handle = MAIN_TIMER:after(1,
 				function()
 					spawnBall()
 				end
 			)
 		else
+			SFX_GAMEOVER:play()
 			startGameOver()
 		end
 

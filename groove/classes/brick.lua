@@ -23,6 +23,8 @@ Brick = Class{
             hits_to_break = 1
             image = IMG_ICE_BLOCK
             quads = {}
+            hit_sound = SFX_ICE_BRICK_HIT
+            break_sound = SFX_ICE_BRICK_BREAK
             for i = 1, 5 do
                 quads[i] = love.graphics.newQuad(0, (i-1)*height/sy, width/sx, height/sy, image:getDimensions())
             end
@@ -35,6 +37,8 @@ Brick = Class{
             hits_to_break = 2
             image = IMG_ICE_BLOCK
             quads = {}
+            hit_sound = SFX_ICE_BRICK_HIT
+            break_sound = SFX_ICE_BRICK_BREAK
             for i = 1, 5 do
                 quads[i] = love.graphics.newQuad(0, (i-1)*height/sy, width/sx, height/sy, image:getDimensions())
             end
@@ -47,6 +51,8 @@ Brick = Class{
             hits_to_break = 3
             image = IMG_ICE_BLOCK
             quads = {}
+            hit_sound = SFX_ICE_BRICK_HIT
+            break_sound = SFX_ICE_BRICK_BREAK
             for i = 1, 5 do
                 quads[i] = love.graphics.newQuad(0, (i-1)*height/sy, width/sx, height/sy, image:getDimensions())
             end
@@ -60,6 +66,8 @@ Brick = Class{
             hits_to_break = 1
             image = IMG_LAVA_BLOCK
             quads = {}
+            hit_sound = SFX_FIRE_BRICK_HIT
+            break_sound = SFX_FIRE_BRICK_BREAK
             for i = 1, 5 do
                 quads[i] = love.graphics.newQuad(0, (i-1)*height/sy, width/sx, height/sy, image:getDimensions())
             end
@@ -72,6 +80,8 @@ Brick = Class{
             hits_to_break = 2
             image = IMG_LAVA_BLOCK
             quads = {}
+            hit_sound = SFX_FIRE_BRICK_HIT
+            break_sound = SFX_FIRE_BRICK_BREAK
             for i = 1, 5 do
                 quads[i] = love.graphics.newQuad(0, (i-1)*height/sy, width/sx, height/sy, image:getDimensions())
             end
@@ -84,6 +94,8 @@ Brick = Class{
             hits_to_break = 3
             image = IMG_LAVA_BLOCK
             quads = {}
+            hit_sound = SFX_FIRE_BRICK_HIT
+            break_sound = SFX_FIRE_BRICK_BREAK
             for i = 1, 5 do
                 quads[i] = love.graphics.newQuad(0, (i-1)*height/sy, width/sx, height/sy, image:getDimensions())
             end
@@ -97,6 +109,8 @@ Brick = Class{
             hits_to_break = 1
             image = IMG_ROCK_BLOCK
             quads = {}
+            hit_sound = SFX_ROCK_BRICK_HIT
+            break_sound = SFX_ROCK_BRICK_BREAK
             for i = 1, 5 do
                 quads[i] = love.graphics.newQuad(0, (i-1)*height/sy, width/sx, height/sy, image:getDimensions())
             end
@@ -109,6 +123,8 @@ Brick = Class{
             hits_to_break = 2
             image = IMG_ROCK_BLOCK
             quads = {}
+            hit_sound = SFX_ROCK_BRICK_HIT
+            break_sound = SFX_ROCK_BRICK_BREAK
             for i = 1, 5 do
                 quads[i] = love.graphics.newQuad(0, (i-1)*height/sy, width/sx, height/sy, image:getDimensions())
             end
@@ -121,6 +137,8 @@ Brick = Class{
             hits_to_break = 3
             image = IMG_ROCK_BLOCK
             quads = {}
+            hit_sound = SFX_ROCK_BRICK_HIT
+            break_sound = SFX_ROCK_BRICK_BREAK
             for i = 1, 5 do
                 quads[i] = love.graphics.newQuad(0, (i-1)*height/sy, width/sx, height/sy, image:getDimensions())
             end
@@ -130,6 +148,8 @@ Brick = Class{
         self.hits_to_break = hits_to_break --How many hits the block needs to break
         self.is_destroyed = false --If the block is being destroyed
 
+        self.hit_sound = hit_sound
+        self.break_sound = break_sound
 
         self.image = image
         self.quads = quads
@@ -281,8 +301,10 @@ function Brick:got_hit(ball)
 
     self.hits_to_break = self.hits_to_break - 1
     if self.hits_to_break <= 0 then
+        self.break_sound:play()
         self:die()
     else
+        self.hit_sound:play()
         self.cur_quad = self.cur_quad + 2
     end
 
