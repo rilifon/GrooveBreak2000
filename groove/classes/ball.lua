@@ -45,6 +45,14 @@ function Ball:update(dt)
 
     --Handle ball movement
     if not self.static then
+
+        if math.abs(self.dir:angleTo(Vector(1,0))) < .1 then
+            self.dir = Vector(1,-1):normalized()
+        elseif math.abs(self.dir:angleTo(Vector(-1,0))) < .1 then
+            self.dir = Vector(-1,-1):normalized()
+        end
+
+
         --Move ball
         self.pos = self.pos + self.dir*self.speed*dt
 

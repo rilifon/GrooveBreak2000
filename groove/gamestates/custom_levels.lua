@@ -143,6 +143,13 @@ function createCustomLevelsButtons()
 				Gamestate.switch(GS.GAME)
 				Gamestate.switch(GS.CSTM_LVLS)
 			end, "custom_level_button")
+
+		--Create edit button
+		Button.createRegularButton(initial_x + width + 40 + height, initial_y + (i-1)*(height+gap), height*1.5, height, Color.red(), "edit",
+			function()
+				LEVEL_TO_LOAD = level
+				Gamestate.switch(GS.LVL_EDT)
+			end, "custom_level_button")
 	end
 end
 

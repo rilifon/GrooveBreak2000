@@ -73,10 +73,21 @@ EditorBox = Class{
             function()
                 editor_funcs.save_custom_level(self)
             end
+
         )
-        self.level_name = "no name"
+        local txt
+        if LEVEL_TO_LOAD then
+            self.level_name = LEVEL_TO_LOAD.name
+            txt = LEVEL_TO_LOAD.name
+        else
+            self.level_name = "no name"
+            txt = "press here for a random level name"
+        end
+
+
+
         local width, height = 1300, 100
-        self.level_name_button = RegularButton(0, 0, width, height, Color.purple(), "press here for a random level name",
+        self.level_name_button = RegularButton(0, 0, width, height, Color.purple(), txt,
             function()
                 local name = editor_funcs.getRandomName()
                 self.level_name_button.text = name
@@ -192,7 +203,15 @@ function editor_funcs.save_custom_level(editor)
         end
     end
 
-    table.insert(CUSTOM_LEVELS, t)
+    if not LEVEL_TO_LOAD then
+        table.insert(CUSTOM_LEVELS, t)
+    else
+        for i = 1, Util.tableLen(CUSTOM_LEVELS) do
+            if CUSTOM_LEVELS[i] == LEVEL_TO_LOAD then
+                CUSTOM_LEVELS[i] =  t
+            end
+        end
+    end
 
     Gamestate.switch(GS.MENU) --Go back to menu
 

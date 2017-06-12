@@ -27,6 +27,13 @@ function state:enter()
 
 	Editor_Box.create()
 
+	if LEVEL_TO_LOAD then
+		--Create bricks
+		for _,brick in pairs(LEVEL_TO_LOAD.bricks) do
+			Brick.createDrag(brick.x, brick.y, brick.type)
+		end
+	end
+
 end
 
 function state:leave()
